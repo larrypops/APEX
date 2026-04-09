@@ -30,24 +30,24 @@ export function HomeHeroShowcase({ products }: HomeHeroShowcaseProps) {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <Link
         href={`/products/${activeProduct.slug}`}
-        className="group block overflow-hidden rounded-[28px] border border-[rgba(110,156,206,0.16)] bg-white p-3 shadow-[0_18px_36px_rgba(8,18,33,0.08)] md:p-4"
+        className="group block overflow-hidden rounded-[20px] border border-[#edf1f5] bg-[#f8f9fb]"
       >
         <Image
           src={activeProduct.images[0]}
           alt={activeProduct.name}
           width={900}
           height={1100}
-          sizes="(max-width: 768px) 100vw, 520px"
-          className="aspect-[4/5] w-full rounded-[24px] bg-[#eef7ff] object-cover transition duration-300 group-hover:scale-[1.01]"
+          sizes="(max-width: 768px) calc(100vw - 0.75rem), (max-width: 1200px) 62vw, 760px"
+          className="aspect-[4/5] w-full bg-[#f8f9fb] object-contain p-3 transition duration-300 group-hover:scale-[1.015] sm:p-4 md:aspect-[6/5] lg:aspect-[5/4]"
           priority
         />
       </Link>
 
       {products.length > 1 ? (
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-2.5">
           {products.map((product, index) => (
             <button
               key={product.id}
@@ -56,7 +56,7 @@ export function HomeHeroShowcase({ products }: HomeHeroShowcaseProps) {
               className={`h-2.5 rounded-full transition ${
                 index === activeIndex
                   ? "w-7 bg-[var(--accent-strong)]"
-                  : "w-2.5 bg-[rgba(110,156,206,0.32)]"
+                  : "w-2.5 bg-[#cfd8e3]"
               }`}
               aria-label={`Show ${product.name}`}
             />

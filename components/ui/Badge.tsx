@@ -8,8 +8,8 @@ type BadgeProps = {
 export function Badge({ children, variant = "default" }: BadgeProps) {
   const styles =
     variant === "warning"
-      ? "bg-[rgba(232,246,255,0.9)] text-[#005fba] border-[rgba(17,152,255,0.24)]"
-      : "bg-white/92 text-slate-700 border-[var(--border)]";
+      ? "bg-[rgba(238,245,255,0.9)] text-[var(--accent-strong)] border-[rgba(17,117,209,0.16)]"
+      : "bg-[#f8fafc] text-slate-700 border-[var(--border)]";
 
   return (
     <span

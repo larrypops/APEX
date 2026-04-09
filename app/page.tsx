@@ -89,28 +89,30 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="container-shell flex flex-col gap-8 py-6 md:py-10">
-        <section className="surface fade-up rounded-[28px] p-4 md:p-6">
-          <div className="mx-auto max-w-[560px] rounded-[24px] bg-white p-4 shadow-[0_18px_36px_rgba(8,18,33,0.08)] md:p-6">
-            <HomeHeroShowcase products={heroProducts} />
-            <div className="mt-5 rounded-[20px] border border-[#f1df97] bg-[#fff7cc] px-4 py-3 text-center text-sm font-semibold text-[#6e5200]">
-              Warning: Minors are prohibited from purchasing!
+      <div className="container-shell flex flex-col gap-8 py-4 md:py-8">
+        <section className="surface fade-up rounded-[24px] p-3 md:p-5 lg:p-6">
+          <div className="grid gap-5 lg:grid-cols-[minmax(0,1.3fr)_minmax(280px,0.7fr)] lg:items-center lg:gap-8">
+            <div className="space-y-4">
+              <HomeHeroShowcase products={heroProducts} />
+              <div className="rounded-2xl border border-[#ecd98d] bg-[#fff8cf] px-4 py-3 text-center text-sm font-semibold text-[#5f4700] lg:text-left">
+                Warning: Minors are prohibited from purchasing!
+              </div>
             </div>
-            <div className="mt-5 space-y-3 text-center">
+            <div className="space-y-3 px-1 pb-1 text-center lg:px-0 lg:text-left">
               <p className="text-sm font-semibold text-[var(--accent-strong)]">
                 Welcome to inquire!
               </p>
-              <h1 className="text-4xl font-semibold uppercase tracking-tight text-neutral-950 md:text-5xl">
+              <h1 className="text-[2.4rem] font-bold uppercase leading-none tracking-[-0.05em] text-neutral-950 sm:text-5xl lg:text-[4.5rem]">
                 LASER PRODUCT
               </h1>
-              <p className="text-base font-medium text-neutral-800">
+              <p className="text-sm font-medium text-neutral-700 sm:text-base">
                 All Prices Are in US Dollars
               </p>
             </div>
           </div>
         </section>
 
-        <section className="fade-up fade-up-delay-1 space-y-5">
+        <section className="fade-up fade-up-delay-1 space-y-4">
           <div className="flex items-end justify-between gap-4">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--accent)]">
@@ -122,7 +124,7 @@ export default async function HomePage() {
               Open catalog page
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-4 md:gap-5 lg:grid-cols-3 lg:gap-6">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:grid-cols-3 lg:gap-6">
             {catalogProducts.map((product) => (
               <ProductCard key={product.id} product={product} currency={currency} />
             ))}

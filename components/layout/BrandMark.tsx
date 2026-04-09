@@ -12,11 +12,15 @@ export function BrandMark({
   light = false,
   showText = true,
 }: BrandMarkProps) {
+  const frameStyles = light
+    ? "border-white/14 bg-white/10 shadow-none"
+    : "border-[rgba(15,23,42,0.08)] bg-white shadow-[0_8px_18px_rgba(15,23,42,0.06)]";
+
   return (
-    <Link href="/" aria-label="APEX LASER GROUP home" className="flex items-center gap-3">
+    <Link href="/" aria-label="APEX LASER GROUP home" className="flex items-center gap-2.5">
       <div
-        className={`overflow-hidden rounded-2xl border border-white/10 bg-[#071121] shadow-[0_14px_34px_rgba(5,14,32,0.24)] ${
-          compact ? "h-14 w-14" : "h-16 w-16"
+        className={`overflow-hidden rounded-[16px] border ${frameStyles} ${
+          compact ? "h-11 w-11 md:h-12 md:w-12" : "h-14 w-14 md:h-16 md:w-16"
         }`}
       >
         <Image
