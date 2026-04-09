@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { HomeHeroShowcase } from "@/components/home/HomeHeroShowcase";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  TelegramIcon,
+  XIcon,
+  YouTubeIcon,
+} from "@/components/ui/Icons";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { ProductCard } from "@/components/products/ProductCard";
@@ -40,11 +47,11 @@ const trustStats = [
 ];
 
 const socialLinks = [
-  { label: "Facebook", href: "#" },
-  { label: "X", href: "#" },
-  { label: "YouTube", href: "#" },
-  { label: "Instagram", href: "#" },
-  { label: "Telegram", href: "#" },
+  { label: "Facebook", href: "#", icon: FacebookIcon },
+  { label: "X", href: "#", icon: XIcon },
+  { label: "YouTube", href: "#", icon: YouTubeIcon },
+  { label: "Instagram", href: "#", icon: InstagramIcon },
+  { label: "Telegram", href: "#", icon: TelegramIcon },
 ];
 
 export default async function HomePage() {
@@ -237,9 +244,12 @@ export default async function HomePage() {
                 <a
                   key={item.label}
                   href={item.href}
-                  className="rounded-full border border-[var(--border)] bg-white px-4 py-2 text-sm font-medium text-neutral-700 transition hover:border-neutral-900 hover:text-neutral-950"
+                  className="rounded-full border border-[var(--border)] bg-white px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-neutral-900 hover:text-neutral-950"
                 >
-                  {item.label}
+                  <span className="inline-flex items-center gap-2">
+                    <item.icon className="h-4 w-4" />
+                    <span>{item.label}</span>
+                  </span>
                 </a>
               ))}
             </div>

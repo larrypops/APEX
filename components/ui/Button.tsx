@@ -24,7 +24,7 @@ export function Button({
   const tone =
     variant === "secondary"
       ? "border border-[rgba(18,52,88,0.14)] bg-white/90 text-slate-900 hover:border-[rgba(0,105,217,0.42)] hover:bg-white"
-      : "bg-[linear-gradient(135deg,#17b0ff_0%,#0b7cff_52%,#0a5ed7_100%)] text-white shadow-[0_18px_36px_rgba(10,94,215,0.26)] hover:shadow-[0_22px_44px_rgba(10,94,215,0.34)]";
+      : "bg-[linear-gradient(135deg,#17b0ff_0%,#0b7cff_52%,#0a5ed7_100%)] text-white [text-shadow:0_1px_1px_rgba(0,0,0,0.22)] shadow-[0_18px_36px_rgba(10,94,215,0.26)] hover:shadow-[0_22px_44px_rgba(10,94,215,0.34)]";
 
   if (external) {
     return (

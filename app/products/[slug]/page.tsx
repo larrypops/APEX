@@ -6,6 +6,13 @@ import { ProductDetailsTabs } from "@/components/products/ProductDetailsTabs";
 import { ProductOrderPanel } from "@/components/products/ProductOrderPanel";
 import { PriceBlock } from "@/components/products/PriceBlock";
 import { RelatedProducts } from "@/components/products/RelatedProducts";
+import {
+  FacebookIcon,
+  LinkedInIcon,
+  PinterestIcon,
+  TelegramIcon,
+  XIcon,
+} from "@/components/ui/Icons";
 import { Badge } from "@/components/ui/Badge";
 import { getProductBySlug, products } from "@/data/products";
 import { getProductPricing } from "@/lib/currency";
@@ -185,12 +192,21 @@ export default async function ProductPage({ params }: PageProps) {
 
               <div className="flex flex-wrap items-center gap-3 text-sm text-neutral-600">
                 <span className="font-semibold text-neutral-900">Share:</span>
-                {["Facebook", "X", "Pinterest", "LinkedIn", "Telegram"].map((item) => (
+                {[
+                  { label: "Facebook", icon: FacebookIcon },
+                  { label: "X", icon: XIcon },
+                  { label: "Pinterest", icon: PinterestIcon },
+                  { label: "LinkedIn", icon: LinkedInIcon },
+                  { label: "Telegram", icon: TelegramIcon },
+                ].map((item) => (
                   <span
-                    key={item}
-                    className="rounded-full border border-[var(--border)] bg-white px-3 py-2"
+                    key={item.label}
+                    className="rounded-full border border-[var(--border)] bg-white px-3 py-2 text-neutral-800"
                   >
-                    {item}
+                    <span className="inline-flex items-center gap-2">
+                      <item.icon className="h-4 w-4" />
+                      <span>{item.label}</span>
+                    </span>
                   </span>
                 ))}
               </div>
