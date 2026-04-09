@@ -2,6 +2,7 @@
 
 import type { FormEvent } from "react";
 import { useMemo, useState } from "react";
+import { flagEmoji, phoneCountries } from "@/data/phoneCountries";
 import type { Product } from "@/data/products";
 import { PaymentMethodCard } from "@/components/order/PaymentMethodCard";
 import type { CurrencyCode } from "@/lib/currency";
@@ -57,9 +58,13 @@ function emailIsValid(value: string) {
 
 export function OrderRequestForm({ product, quantity, currency }: OrderRequestFormProps) {
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("visa");
+  const [phoneCountryCode, setPhoneCountryCode] = useState("US");
+  const [phoneValue, setPhoneValue] = useState("");
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
   const pricing = getProductPricing(product, currency);
+  const selectedPhoneCountry =
+    phoneCountries.find((country) => country.code === phoneCountryCode) ?? phoneCountries[0];
 
   const orderMeta = useMemo(
     () => ({
@@ -69,15 +74,16 @@ export function OrderRequestForm({ product, quantity, currency }: OrderRequestFo
       unitPrice: pricing.currentPrice,
       total: pricing.currentPrice * quantity,
       currency,
+      phone: `${selectedPhoneCountry.dialCode} ${phoneValue}`.trim(),
     }),
-    [product, quantity, pricing.currentPrice, currency],
+    [product, quantity, pricing.currentPrice, currency, phoneValue, selectedPhoneCountry.dialCode],
   );
 
   function handleSubmit(formData: FormData) {
     const nextErrors: Errors = {};
     const firstName = String(formData.get("firstName") ?? "").trim();
     const lastName = String(formData.get("lastName") ?? "").trim();
-    const phone = String(formData.get("phone") ?? "").trim();
+    const phone = phoneValue.trim();
     const email = String(formData.get("email") ?? "").trim();
     const address = String(formData.get("address") ?? "").trim();
 
@@ -142,11 +148,59 @@ export function OrderRequestForm({ product, quantity, currency }: OrderRequestFo
         <input type="hidden" name="quantity" value={String(orderMeta.quantity)} />
         <input type="hidden" name="unitPrice" value={String(orderMeta.unitPrice)} />
         <input type="hidden" name="currency" value={orderMeta.currency} />
+        <input type="hidden" name="phone" value={orderMeta.phone} />
 
         <div className="grid gap-4 md:grid-cols-2 md:gap-5">
           <Field label="First Name" name="firstName" placeholder="Enter your first name" error={errors.firstName} />
           <Field label="Last Name" name="lastName" placeholder="Enter your last name" error={errors.lastName} />
-          <Field label="Phone Number" name="phone" type="tel" placeholder="Enter your phone number" error={errors.phone} />
+          <div className="md:col-span-2">
+            <label className="block">
+              <span className="mb-2 block text-sm font-semibold text-neutral-900">Phone Number</span>
+              <div className="grid gap-3 md:grid-cols-[240px_1fr]">
+                <div className="relative">
+                  <select
+                    name="phoneCountry"
+                    value={phoneCountryCode}
+                    onChange={(event) => setPhoneCountryCode(event.target.value)}
+                    className="w-full appearance-none rounded-[22px] border border-[rgba(120,162,200,0.18)] bg-[rgba(247,251,255,0.92)] px-4 py-3 pr-10 text-sm text-neutral-900 outline-none transition focus:border-[var(--accent)] focus:bg-white"
+                  >
+                    {phoneCountries.map((country) => (
+                      <option key={country.code} value={country.code}>
+                        {flagEmoji(country.code)} {country.name} ({country.dialCode})
+                      </option>
+                    ))}
+                  </select>
+                  <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500">
+                    v
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 rounded-[22px] border border-[rgba(120,162,200,0.18)] bg-[rgba(247,251,255,0.92)] px-4 py-3 transition focus-within:border-[var(--accent)] focus-within:bg-white">
+                  <span className="shrink-0 rounded-full bg-[var(--accent-soft)] px-3 py-1 text-sm font-semibold text-[var(--accent-strong)]">
+                    {selectedPhoneCountry.dialCode}
+                  </span>
+                  <input
+                    type="tel"
+                    name="phoneLocal"
+                    value={phoneValue}
+                    onChange={(event) => setPhoneValue(event.target.value)}
+                    placeholder="Enter your phone number"
+                    className="w-full bg-transparent text-sm text-neutral-900 outline-none placeholder:text-neutral-500"
+                    aria-invalid={Boolean(errors.phone)}
+                    aria-describedby={errors.phone ? "phone-error" : undefined}
+                  />
+                </div>
+              </div>
+              {errors.phone ? (
+                <p id="phone-error" className="mt-2 text-sm text-red-600">
+                  {errors.phone}
+                </p>
+              ) : (
+                <p className="mt-2 text-sm text-neutral-700">
+                  Select your country code and enter your active mobile or WhatsApp number.
+                </p>
+              )}
+            </label>
+          </div>
           <Field label="Email Address" name="email" type="email" placeholder="Enter your email address" error={errors.email} />
           <Field label="City" name="city" placeholder="City" />
           <Field label="State / Region" name="state" placeholder="State or region" />

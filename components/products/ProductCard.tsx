@@ -37,6 +37,13 @@ export function ProductCard({ product, currency }: ProductCardProps) {
           <h3 className="text-lg font-semibold leading-7 tracking-tight text-neutral-950">
             {product.name}
           </h3>
+          <div className="flex flex-wrap items-center gap-2 text-sm text-neutral-700">
+            <span className="font-semibold text-[var(--gold)]">
+              {"★".repeat(Math.round(product.rating))}
+            </span>
+            <span>{product.rating.toFixed(1)}</span>
+            <span>({product.reviewCount})</span>
+          </div>
           <div className="flex items-center gap-2 text-sm">
             {pricing.oldPrice ? (
               <span className="text-neutral-500 line-through">

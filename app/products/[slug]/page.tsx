@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductGallery } from "@/components/products/ProductGallery";
@@ -174,14 +175,29 @@ export default async function ProductPage({ params }: PageProps) {
                 <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-700">
                   Preferred Payment Options
                 </h2>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {["Visa", "Mastercard", "PayPal"].map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full border border-[var(--border)] bg-neutral-50 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-neutral-700"
+                <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                  {[
+                    { label: "Visa", logo: "/images/payments/visa.svg" },
+                    { label: "Mastercard", logo: "/images/payments/mastercard.svg" },
+                    { label: "PayPal", logo: "/images/payments/paypal.svg" },
+                  ].map((item) => (
+                    <div
+                      key={item.label}
+                      className="rounded-[18px] border border-[var(--border)] bg-[linear-gradient(180deg,#ffffff_0%,#f6fbff_100%)] p-4"
                     >
-                      {item}
-                    </span>
+                      <div className="flex h-12 items-center justify-center rounded-2xl border border-[rgba(120,162,200,0.14)] bg-white px-3">
+                        <Image
+                          src={item.logo}
+                          alt={`${item.label} logo`}
+                          width={72}
+                          height={36}
+                          className="h-auto w-auto"
+                        />
+                      </div>
+                      <p className="mt-3 text-center text-sm font-semibold text-neutral-800">
+                        {item.label}
+                      </p>
+                    </div>
                   ))}
                 </div>
                 <p className="mt-3 text-sm leading-7 text-neutral-700">
