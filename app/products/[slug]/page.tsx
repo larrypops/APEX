@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductGallery } from "@/components/products/ProductGallery";
 import { ProductOrderPanel } from "@/components/products/ProductOrderPanel";
+import { RelatedProducts } from "@/components/products/RelatedProducts";
 import {
   ContactIcon,
   EyeIcon,
@@ -46,7 +47,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: product.name,
       description: product.shortDescription,
       path: `/products/${product.slug}`,
-      keywords: [product.name, product.category, `${product.category} supplier`],
+      keywords: [
+        product.name,
+        `${product.name} price`,
+        `${product.name} specifications`,
+        `${product.category} supplier`,
+        `${product.category} manufacturer`,
+        `${product.category} wholesale`,
+        `APEX LASER GROUP ${product.category}`,
+        `Model ${product.model}`,
+      ],
     }),
     openGraph: {
       type: "website",
@@ -224,14 +234,14 @@ export default async function ProductPage({ params }: PageProps) {
                     <EyeIcon className="h-4 w-4" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold">{liveViewers} personnes regardent ce produit</p>
-                    <p className="text-sm text-neutral-600">Indicateur visuel d’intérêt produit</p>
+                    <p className="text-sm font-semibold">{liveViewers} people are viewing this product</p>
+                    <p className="text-sm text-neutral-600">Live product interest indicator</p>
                   </div>
                 </div>
               </div>
 
               <div className="rounded-[18px] border border-[var(--border)] bg-white p-4">
-                <p className="text-sm font-semibold text-neutral-900">Partager</p>
+                <p className="text-sm font-semibold text-neutral-900">Share</p>
                 <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-neutral-700">
                   {[
                     { label: "Facebook", icon: FacebookIcon },
@@ -272,6 +282,14 @@ export default async function ProductPage({ params }: PageProps) {
               ) : null}
             </div>
           </div>
+        </section>
+
+        <section className="fade-up fade-up-delay-2 mt-8">
+          <RelatedProducts
+            currentSlug={product.slug}
+            relatedSlugs={product.relatedProductSlugs}
+            currency={pricing.currency}
+          />
         </section>
       </div>
     </>

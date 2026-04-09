@@ -98,6 +98,38 @@ SHARED_REVIEWS = [
 ]
 
 IGNORED_SPECS = {"Warning:", "Details:", "Product details:", "Shipping List:", "Product advantages:", "Declaration:", "Basic configuration:", "Function:"}
+SECTION_HEADERS = {
+    "warning",
+    "details",
+    "product details",
+    "shipping list",
+    "product advantages",
+    "declaration",
+    "basic configuration",
+    "function",
+}
+MARKETING_LINE_BLACKLIST = (
+    "minors",
+    "under 18",
+    "do not irradiate",
+    "do not shine",
+    "human body",
+    "illegal",
+    "counterfeit",
+    "i purchased",
+    "american teacher",
+    "refund for counterfeit",
+    "do not use",
+    "strictly illuminate",
+    "shipping list",
+    "warranty",
+    "protective goggles",
+    "glasses",
+    "charger*1",
+    "* 1",
+    "military product",
+    "laser weapons",
+)
 
 
 def make_slug(name: str) -> str:
@@ -111,12 +143,19 @@ def clean_text(value: str | None) -> str | None:
     return value or None
 
 
+def normalize_text(value: str) -> str:
+    value = value.replace("：", ":").replace("×", "x").replace("–", "-").replace("—", "-")
+    value = value.replace("trong blue light", "strong blue light")
+    value = re.sub(r"\s+", " ", value).strip()
+    return value
+
+
 def clean_short_description(value: str | None) -> str | None:
     if not value:
         return None
     value = re.sub(r"^1\.\s*", "", value.strip())
     value = re.sub(r"^(Warning:|Details:)\s*", "", value, flags=re.I)
-    value = re.sub(r"\s+", " ", value).strip()
+    value = normalize_text(value)
     return value or None
 
 
@@ -131,6 +170,183 @@ def spec_value(specs: list[str], label: str) -> str | None:
     for spec in specs:
         if spec.lower().startswith(label.lower() + ":"):
             return spec.split(":", 1)[1].strip()
+    return None
+
+
+def spec_value_any(specs: list[str], labels: list[str]) -> str | None:
+    for label in labels:
+        value = spec_value(specs, label)
+        if value:
+            return normalize_text(value)
+    return None
+
+
+def summarize_distance(value: str | None) -> str | None:
+    if not value:
+        return None
+    value = re.sub(r"\([^)]*\)", "", normalize_text(value)).strip(" ,;:")
+    value = value.replace("meter", "meters") if value.lower().endswith(" meter") else value
+    return value.lower() or None
+
+
+def format_source_type(value: str | None) -> str:
+    if not value:
+        return "advanced laser source"
+
+    normalized = normalize_text(value)
+    lowered = normalized.lower()
+
+    if lowered == "led":
+        return "LED light source"
+    if lowered == "red light":
+        return "red-light laser source"
+    if lowered == "green light":
+        return "green-light laser source"
+    if lowered == "laser source":
+        return "high-output laser source"
+    if re.fullmatch(r"\d+\s*nm", lowered):
+        return f"{lowered} laser wavelength"
+
+    return lowered
+
+
+def format_material(value: str | None) -> str:
+    if not value:
+        return "durable metal construction"
+
+    normalized = normalize_text(value).lower()
+
+    if "aluminum alloy" in normalized:
+        return "aluminum alloy housing"
+    if "pure copper" in normalized or normalized == "copper":
+        return "copper housing"
+    if "pure metal" in normalized or "all metal" in normalized:
+        return "all-metal housing"
+
+    return normalized
+
+
+def format_protection(value: str | None) -> str | None:
+    if not value:
+        return None
+
+    normalized = normalize_text(value).lower()
+    if normalized in {"yes", "supports", "support"}:
+        return "integrated protection support"
+    return normalized
+
+
+def trim_to_length(text: str, limit: int) -> str:
+    text = normalize_text(text).rstrip(" .,;:")
+    if len(text) <= limit:
+        return text + "."
+    shortened = text[: limit + 1].rsplit(" ", 1)[0].rstrip(" .,;:")
+    shortened = re.sub(r"\b(with|and|for|or|to|of)\Z", "", shortened).rstrip(" ,;:")
+    return shortened + "."
+
+
+def extract_marketing_points(raw_description: str | None) -> list[str]:
+    if not raw_description:
+        return []
+
+    points: list[str] = []
+    saw_section_header = False
+
+    for raw_line in raw_description.splitlines():
+        line = normalize_text(raw_line)
+        if not line:
+            continue
+
+        lowered = line.lower().rstrip(":")
+        if lowered in SECTION_HEADERS:
+            saw_section_header = True
+            continue
+        if saw_section_header:
+            continue
+
+        line = re.sub(r"^\d+[\.\)]\s*", "", line)
+        line = line.strip(" -*•")
+        lowered = line.lower()
+
+        if not line or any(token in lowered for token in MARKETING_LINE_BLACKLIST):
+            continue
+
+        if ":" in line and len(line.split(":", 1)[0]) <= 24:
+            continue
+
+        if len(line.split()) < 5:
+            continue
+
+        if line not in points:
+            points.append(line.rstrip("."))
+
+    return points[:3]
+
+
+def marketing_sentence(point: str, category: str) -> str | None:
+    lowered = point.lower()
+
+    if "water cooling" in lowered:
+        return "The product positioning highlights a water-cooling system for longer operating sessions and long-range setup."
+    if "you can reorder a small or large lens" in lowered:
+        return "This model is presented with lens options that support close-range setup and longer-distance configuration."
+    if "lens threads" in lowered or "close range lens" in lowered or "long-range lens" in lowered:
+        return "This model is presented with lens options that support close-range setup and longer-distance configuration."
+    if "all metal" in lowered:
+        return "The body is presented with an all-metal housing for a more solid handheld feel."
+    if "lightweight" in lowered:
+        return "Its lightweight handheld format is positioned for easier transport and day-to-day handling."
+    if "flashlight" in lowered:
+        return "The flashlight-style body gives the unit a familiar handheld form factor."
+    if "highest quality" in lowered or "sales volume" in lowered or "deeply loved" in lowered:
+        return "This version is positioned as a popular compact-body option within the laser igniter range."
+    if "high-altitude obstacle" in lowered or "power companies" in lowered or "railway companies" in lowered:
+        return "It is positioned for enterprise and infrastructure teams handling high-altitude obstacle-clearing work."
+    if "customized product" in lowered or "delivery time" in lowered or "customization time" in lowered:
+        return "Lead times may vary because this model is discussed as a custom-order configuration."
+    if "laser obstacle clearing device" in lowered or "high-energy laser technology" in lowered:
+        return "The system is presented as a non-contact obstacle-clearing solution for long-range field deployment."
+
+    if len(point.split()) >= 6 and len(point) <= 140:
+        return point.rstrip(".") + "."
+
+    return None
+
+
+def describe_source_type(value: str | None) -> str:
+    if value and re.fullmatch(r"\d+", value):
+        return f"{value}nm laser wavelength"
+    return format_source_type(value)
+
+
+def choose_feature_phrase(category: str, specs: list[str], marketing_points: list[str]) -> str | None:
+    marketing_blob = " ".join(marketing_points).lower()
+    material = spec_value_any(specs, ["Material", "Shell"])
+    distance = spec_value_any(specs, ["Maximum range", "Ignition distance", "Operating distance", "Effective distance"])
+    lens = spec_value_any(specs, ["Lens", "Focusing system", "Aiming method", "Preview light"])
+    battery = spec_value_any(specs, ["Battery", "Power supply", "Power supply requirement", "Power supply method"])
+    protection = spec_value_any(specs, ["Protection level", "Balance protection board"])
+
+    if "water cooling" in marketing_blob:
+        return "water-cooling support"
+    if "flashlight" in marketing_blob:
+        return "flashlight-style handheld body"
+    if "lightweight" in marketing_blob:
+        return "lightweight handheld design"
+    if "lens" in marketing_blob or lens:
+        return "adjustable lens support"
+    if "highest quality" in marketing_blob or "sales volume" in marketing_blob:
+        return "popular compact-body configuration"
+    if material:
+        return format_material(material)
+    if distance and category != "Laser Machine":
+        summarized_distance = summarize_distance(distance)
+        if summarized_distance:
+            return f"{summarized_distance} operating range"
+    if battery:
+        return f"{battery.lower()} power setup"
+    if protection:
+        return f"{protection.lower()} protection support"
     return None
 
 
@@ -163,83 +379,120 @@ def fallback_specs(category: str, wattage: str) -> list[str]:
     ]
 
 
-def build_seo_short_description(name: str, category: str, wattage: str, specs: list[str]) -> str:
-    material = spec_value(specs, "Material") or spec_value(specs, "Shell")
-    distance = spec_value(specs, "Maximum range") or spec_value(specs, "Ignition distance") or spec_value(specs, "Operating distance")
-    battery = spec_value(specs, "Battery")
-
-    parts = [f"{BRAND_NAME} {name}"]
-
-    if category == "Laser Machine":
-        parts.append(f"{wattage}W industrial laser equipment")
-    elif category == "Laser Light":
-        parts.append(f"{wattage}W compact laser light")
-    else:
-        parts.append(f"{wattage}W laser igniter")
-
-    if material:
-        parts.append(f"with {material.lower()}")
-    if distance:
-        parts.append(f"and visible {distance.lower()} performance")
-    elif battery:
-        parts.append(f"with {battery.lower()}")
-
-    parts.append("for professional inquiry and project evaluation")
-    return " ".join(parts)[:220].strip()
-
-
-def build_seo_full_description(name: str, category: str, wattage: str, specs: list[str]) -> str:
-    material = spec_value(specs, "Material") or spec_value(specs, "Shell") or "durable metal construction"
-    distance = spec_value(specs, "Maximum range") or spec_value(specs, "Ignition distance") or spec_value(specs, "Operating distance")
-    battery = spec_value(specs, "Battery")
-    charger = spec_value(specs, "Charger")
-    size = spec_value(specs, "Size") or spec_value(specs, "Equipment dimensions")
-    source_type = spec_value(specs, "Light source type") or spec_value(specs, "Light bulb") or "laser source"
+def build_seo_short_description(
+    name: str,
+    category: str,
+    wattage: str,
+    specs: list[str],
+    marketing_points: list[str],
+) -> str:
+    feature = choose_feature_phrase(category, specs, marketing_points)
+    distance = spec_value_any(specs, ["Maximum range", "Ignition distance", "Operating distance", "Effective distance"])
 
     if category == "Laser Machine":
+        sentence = (
+            f"{name} is a {wattage}W industrial laser machine from {BRAND_NAME} for enterprise procurement, "
+            "technical review, and obstacle-clearing work"
+        )
+    elif category == "Laser Light":
+        sentence = (
+            f"{name} is a {wattage}W laser light from {BRAND_NAME} for demos, alignment work, "
+            "and product sourcing"
+        )
+        if feature:
+            sentence += f", with {feature}"
+    else:
+        sentence = (
+            f"{name} is a {wattage}W laser igniter from {BRAND_NAME} for professional sourcing "
+            "and technical review"
+        )
+        if feature:
+            sentence += f", with {feature}"
+        elif distance:
+            sentence += f", with {distance.lower()}"
+
+    return trim_to_length(sentence, 165)
+
+
+def build_seo_full_description(
+    name: str,
+    category: str,
+    wattage: str,
+    specs: list[str],
+    marketing_points: list[str],
+) -> str:
+    material = spec_value_any(specs, ["Material", "Shell"]) or "durable metal construction"
+    distance = spec_value_any(specs, ["Maximum range", "Ignition distance", "Operating distance", "Effective distance"])
+    battery = spec_value_any(specs, ["Battery", "Power supply", "Power supply requirement", "Power supply method"])
+    charger = spec_value_any(specs, ["Charger"])
+    size = spec_value_any(specs, ["Size", "Equipment dimensions", "Total weight of equipment"])
+    source_type = describe_source_type(
+        spec_value_any(specs, ["Light source type", "Light bulb", "Center wavelength"])
+    )
+    lens = spec_value_any(specs, ["Lens", "Focusing system", "Aiming method", "Preview light"])
+    protection = format_protection(spec_value_any(specs, ["Protection level", "Balance protection board"]))
+    control = spec_value_any(specs, ["Control methods", "PTZ", "Power adjustment"])
+    feature = choose_feature_phrase(category, specs, marketing_points)
+    material_phrase = format_material(material)
+    distance_phrase = summarize_distance(distance)
+
+    if category == "Laser Machine":
         sentence_one = (
-            f"{BRAND_NAME} presents {name} as a {wattage}W industrial laser machine designed for "
-            "enterprise procurement, technical review, and custom project discussions."
+            f"{BRAND_NAME} presents {name} as a {wattage}W industrial laser machine for enterprise procurement, "
+            "infrastructure maintenance teams, and advanced technical review."
         )
         sentence_two = (
-            f"This model highlights {source_type.lower()}, {material.lower()}, and a configuration focused on "
-            "stable operation, installation planning, and professional deployment."
+            f"This platform combines {source_type}, {material_phrase}, and a configuration focused on "
+            "stable operation, site deployment, and long-range obstacle-clearing discussions."
         )
     elif category == "Laser Light":
         sentence_one = (
-            f"{BRAND_NAME} offers {name} as a {wattage}W laser light for demonstration, alignment, "
-            "presentation, and other professional visibility use cases."
+            f"{BRAND_NAME} offers {name} as a {wattage}W laser light for demonstrations, alignment tasks, "
+            "presentation visibility, and distributor evaluation."
         )
         sentence_two = (
-            f"The product listing emphasizes {source_type.lower()}, {material.lower()}, and a compact format that "
-            "is easy to carry, present, and evaluate for distribution."
+            f"It combines {source_type}, {material_phrase}, and a compact format that is easy to "
+            "carry, present, and compare during sourcing conversations."
         )
     else:
         sentence_one = (
-            f"{BRAND_NAME} positions {name} as a {wattage}W laser igniter for professional buyers seeking "
-            "high-output laser equipment with clear product specifications and direct sales support."
+            f"{BRAND_NAME} positions {name} as a {wattage}W laser igniter for buyers evaluating handheld "
+            "high-output laser equipment with clear specifications and order-request support."
         )
         sentence_two = (
-            f"The visible specification set highlights {source_type.lower()}, {material.lower()}, and a build "
-            "focused on precision, durability, and consultation-led purchasing."
+            f"This model highlights {source_type}, {material_phrase}, and a build intended for "
+            "durability, focused beam performance, and professional product review."
         )
 
     details = []
-    if distance:
-        details.append(f"Published performance details include {distance.lower()}.")
+    if marketing_points:
+        for point in marketing_points:
+            sentence = marketing_sentence(point, category)
+            if sentence and sentence not in details:
+                details.append(sentence)
+    elif feature:
+        details.append(f"Key product positioning includes {feature}.")
+    if distance_phrase:
+        details.append(f"Published operating distance details include {distance_phrase}.")
+    if lens:
+        details.append(f"The configuration also references {lens.lower()}.")
     if battery:
-        details.append(f"Power information references {battery.lower()}.")
+        details.append(f"Power delivery details mention {battery.lower()}.")
+    if protection:
+        details.append(f"Protection and stability notes include {protection.lower()}.")
+    if control:
+        details.append(f"Control and adjustment details include {control.lower()}.")
     if charger:
-        details.append(f"The package information also mentions {charger.lower()}.")
+        details.append(f"Package and support information also references {charger.lower()}.")
     if size:
-        details.append(f"Listed dimensions include {size.lower()}.")
+        details.append(f"Published size or handling data includes {size.lower()}.")
 
     closing = (
-        f"Contact {BRAND_NAME} for pricing clarification, project matching, lead times, OEM discussions, "
-        "and product configuration support."
+        f"Contact {BRAND_NAME} for pricing, lead times, configuration review, OEM discussions, "
+        "and project-specific order support."
     )
 
-    return " ".join([sentence_one, sentence_two, *details, closing]).strip()
+    return " ".join([sentence_one, sentence_two, *details[:4], closing]).strip()
 
 
 def convert_old_price(old_price_usd: int | None, current_usd: int, current_eur: int) -> int | None:
@@ -288,8 +541,13 @@ def main() -> int:
             ][:4],
             "sourceUrl": imported_entry.get("sourceUrl"),
         }
-        product["shortDescription"] = build_seo_short_description(name, category, wattage, product["specs"])
-        product["fullDescription"] = build_seo_full_description(name, category, wattage, product["specs"])
+        marketing_points = extract_marketing_points(imported_entry.get("fullDescription"))
+        product["shortDescription"] = build_seo_short_description(
+            name, category, wattage, product["specs"], marketing_points
+        )
+        product["fullDescription"] = build_seo_full_description(
+            name, category, wattage, product["specs"], marketing_points
+        )
         output.append(product)
 
     OUTPUT_PATH.write_text(json.dumps(output, ensure_ascii=False, indent=2))
