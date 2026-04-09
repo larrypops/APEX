@@ -67,6 +67,35 @@ export function ArrowRightIcon({ className = baseClass }: IconProps) {
   );
 }
 
+export function TruckIcon({ className = baseClass }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+      <path d="M3.75 6.75h10.5v8.25H3.75V6.75Z" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M14.25 9h3.17l2.83 2.83V15h-6" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="7.5" cy="17.25" r="1.5" />
+      <circle cx="17.25" cy="17.25" r="1.5" />
+    </svg>
+  );
+}
+
+export function ShieldCheckIcon({ className = baseClass }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+      <path d="M12 3.75 5.25 6.75v5.52c0 4.06 2.88 7.83 6.75 8.98 3.87-1.15 6.75-4.92 6.75-8.98V6.75L12 3.75Z" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="m9.3 12.15 1.8 1.8 3.6-4.05" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function EyeIcon({ className = baseClass }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+      <path d="M2.9 12c1.77-3.48 5.21-5.62 9.1-5.62 3.89 0 7.33 2.14 9.1 5.62-1.77 3.48-5.21 5.62-9.1 5.62-3.89 0-7.33-2.14-9.1-5.62Z" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="12" cy="12" r="2.4" />
+    </svg>
+  );
+}
+
 export function FacebookIcon({ className = baseClass }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">

@@ -3,15 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductGallery } from "@/components/products/ProductGallery";
-import { ProductDetailsTabs } from "@/components/products/ProductDetailsTabs";
 import { ProductOrderPanel } from "@/components/products/ProductOrderPanel";
-import { PriceBlock } from "@/components/products/PriceBlock";
-import { RelatedProducts } from "@/components/products/RelatedProducts";
 import {
+  ContactIcon,
+  EyeIcon,
   FacebookIcon,
   LinkedInIcon,
   PinterestIcon,
+  ShieldCheckIcon,
   TelegramIcon,
+  TruckIcon,
   XIcon,
 } from "@/components/ui/Icons";
 import { Badge } from "@/components/ui/Badge";
@@ -73,6 +74,8 @@ export default async function ProductPage({ params }: PageProps) {
     notFound();
   }
   const pricing = getProductPricing(product, currency);
+  const liveViewers =
+    9 + ((Number(product.model.replace(/\D/g, "")) || product.reviewCount + 3) % 13);
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -142,99 +145,114 @@ export default async function ProductPage({ params }: PageProps) {
                   <p className="max-w-2xl text-base leading-8 text-neutral-800">
                     {product.shortDescription}
                   </p>
-                  <p className="text-sm leading-7 text-neutral-700">
-                    Prices are displayed in <span className="font-semibold text-neutral-900">{pricing.currency}</span> based on your detected region. Shipping costs are not included and final order details are confirmed by our team before processing.
-                  </p>
+                  <div className="flex flex-wrap items-end gap-3 border-t border-[var(--border)] pt-3">
+                    {pricing.oldPrice ? (
+                      <span className="text-lg text-neutral-400 line-through">
+                        {pricing.oldPriceFormatted}
+                      </span>
+                    ) : null}
+                    <span className="text-4xl font-semibold tracking-tight text-neutral-950">
+                      {pricing.currentPriceFormatted}
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              <PriceBlock
-                currentPrice={pricing.currentPrice}
-                oldPrice={pricing.oldPrice}
-                currency={pricing.currency}
-              />
-
               <ProductOrderPanel
-                productName={product.name}
                 productSlug={product.slug}
                 currentPrice={pricing.currentPrice}
                 currency={pricing.currency}
               />
 
-              <div className="grid gap-3 sm:grid-cols-2">
-                <div className="rounded-[18px] border border-[var(--border)] bg-white p-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)]">
-                    Delivery Information
-                  </p>
-                  <p className="mt-2 text-sm leading-7 text-neutral-700">
-                    Delivery timing and shipping scope are confirmed after your order request based on destination, quantity, and stock review.
-                  </p>
+              <div className="grid gap-2">
+                {[
+                  {
+                    title: "Delivery",
+                    copy: "Shipping confirmed after order review.",
+                    icon: TruckIcon,
+                  },
+                  {
+                    title: "Confirmation",
+                    copy: "We confirm stock and payment preference.",
+                    icon: ShieldCheckIcon,
+                  },
+                  {
+                    title: "Support",
+                    copy: "Fast help for product and order questions.",
+                    icon: ContactIcon,
+                  },
+                ].map((item) => (
+                  <div
+                    key={item.title}
+                    className="flex items-center gap-3 rounded-[16px] border border-[var(--border)] bg-white px-4 py-3"
+                  >
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-strong)]">
+                      <item.icon className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-neutral-900">{item.title}</p>
+                      <p className="text-sm text-neutral-700">{item.copy}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="rounded-[18px] border border-[var(--border)] bg-white p-4">
+                <p className="text-sm font-semibold text-neutral-900">Preferred payment methods</p>
+                <div className="mt-3 flex flex-wrap items-center gap-3">
+                  {[
+                    { label: "Visa", logo: "/images/payments/visa.svg" },
+                    { label: "Mastercard", logo: "/images/payments/mastercard.svg" },
+                    { label: "PayPal", logo: "/images/payments/paypal.svg" },
+                  ].map((item) => (
+                    <div
+                      key={item.label}
+                      className="flex h-12 items-center justify-center rounded-[12px] border border-[var(--border)] bg-[#fbfbfc] px-3"
+                    >
+                      <Image
+                        src={item.logo}
+                        alt={`${item.label} logo`}
+                        width={76}
+                        height={34}
+                        className="h-auto w-auto"
+                      />
+                    </div>
+                  ))}
                 </div>
-                <div className="rounded-[18px] border border-[var(--border)] bg-white p-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)]">
-                    Order Confirmation
-                  </p>
-                  <p className="mt-2 text-sm leading-7 text-neutral-700">
-                    We review the selected product, quantity, pricing, and preferred payment method before confirming the order with you directly.
-                  </p>
-                </div>
-                <div className="rounded-[18px] border border-[var(--border)] bg-white p-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)]">
-                    Support
-                  </p>
-                  <p className="mt-2 text-sm leading-7 text-neutral-700">
-                    Our team assists with product questions, project matching, delivery planning, and business inquiries before and after submission.
-                  </p>
-                </div>
-                <div className="rounded-[18px] border border-[var(--border)] bg-white p-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)]">
-                    Preferred Payment Methods
-                  </p>
-                  <div className="mt-3 flex flex-wrap items-center gap-3">
-                    {[
-                      { label: "Visa", logo: "/images/payments/visa.svg" },
-                      { label: "Mastercard", logo: "/images/payments/mastercard.svg" },
-                      { label: "PayPal", logo: "/images/payments/paypal.svg" },
-                    ].map((item) => (
-                      <div
-                        key={item.label}
-                        className="flex h-12 items-center justify-center rounded-[12px] border border-[var(--border)] bg-[#fbfbfc] px-3"
-                      >
-                        <Image
-                          src={item.logo}
-                          alt={`${item.label} logo`}
-                          width={76}
-                          height={34}
-                          className="h-auto w-auto"
-                        />
-                      </div>
-                    ))}
+              </div>
+
+              <div className="rounded-[18px] border border-[var(--border)] bg-white p-4">
+                <div className="flex items-center gap-3 text-neutral-900">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-strong)]">
+                    <EyeIcon className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold">{liveViewers} personnes regardent ce produit</p>
+                    <p className="text-sm text-neutral-600">Indicateur visuel d’intérêt produit</p>
                   </div>
                 </div>
               </div>
 
-              <div className="rounded-[18px] border border-[var(--border)] bg-white p-4 md:p-5">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="text-sm font-semibold text-neutral-900">Share this product</p>
-                  <div className="flex flex-wrap items-center gap-2 text-sm text-neutral-700">
-                    {[
-                      { label: "Facebook", icon: FacebookIcon },
-                      { label: "X", icon: XIcon },
-                      { label: "Pinterest", icon: PinterestIcon },
-                      { label: "LinkedIn", icon: LinkedInIcon },
-                      { label: "Telegram", icon: TelegramIcon },
-                    ].map((item) => (
-                      <span
-                        key={item.label}
-                        className="rounded-full border border-[var(--border)] bg-[#fbfbfc] px-3 py-2 text-neutral-800"
-                      >
-                        <span className="inline-flex items-center gap-2">
-                          <item.icon className="h-4 w-4" />
-                          <span>{item.label}</span>
-                        </span>
+              <div className="rounded-[18px] border border-[var(--border)] bg-white p-4">
+                <p className="text-sm font-semibold text-neutral-900">Partager</p>
+                <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-neutral-700">
+                  {[
+                    { label: "Facebook", icon: FacebookIcon },
+                    { label: "X", icon: XIcon },
+                    { label: "Pinterest", icon: PinterestIcon },
+                    { label: "LinkedIn", icon: LinkedInIcon },
+                    { label: "Telegram", icon: TelegramIcon },
+                  ].map((item) => (
+                    <span
+                      key={item.label}
+                      className="rounded-full border border-[var(--border)] bg-[#fbfbfc] px-3 py-2 text-neutral-800"
+                    >
+                      <span className="inline-flex items-center gap-2">
+                        <item.icon className="h-4 w-4" />
+                        <span>{item.label}</span>
                       </span>
-                    ))}
-                  </div>
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
@@ -242,21 +260,21 @@ export default async function ProductPage({ params }: PageProps) {
         </section>
 
         <section className="fade-up fade-up-delay-1 mt-8">
-          <ProductDetailsTabs
-            fullDescription={product.fullDescription}
-            specs={product.specs}
-            reviews={product.reviews}
-            reviewCount={product.reviewCount}
-            productName={product.name}
-          />
-        </section>
-
-        <section className="fade-up fade-up-delay-2 mt-8">
-          <RelatedProducts
-            currentSlug={product.slug}
-            relatedSlugs={product.relatedProductSlugs}
-            currency={pricing.currency}
-          />
+          <div className="surface rounded-[24px] p-5 md:p-6">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)]">
+              Description
+            </p>
+            <div className="prose-copy mt-4 max-w-none">
+              <p>{product.fullDescription || product.shortDescription}</p>
+              {product.specs.length > 0 ? (
+                <ul>
+                  {product.specs.map((spec) => (
+                    <li key={spec}>{spec}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          </div>
         </section>
       </div>
     </>
