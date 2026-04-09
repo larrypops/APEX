@@ -138,27 +138,7 @@ export default async function HomePage() {
                   ))}
                 </div>
               </div>
-              <div className="space-y-4">
-                <HomeHeroShowcase products={featuredProducts.slice(0, 6)} currency={currency} />
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="rounded-[24px] border border-[rgba(123,173,225,0.14)] bg-[rgba(7,17,32,0.82)] p-5 text-white">
-                    <p className="text-xs uppercase tracking-[0.28em] text-[#8fdfff]">Support</p>
-                    <h2 className="mt-4 text-2xl font-semibold">Dedicated Sales Assistance</h2>
-                    <p className="mt-3 text-sm leading-7 text-white/72">
-                      Speak with our team about the right model, technical requirements, shipping
-                      options, and order preparation for your market.
-                    </p>
-                  </div>
-                  <div className="rounded-[24px] border border-[rgba(123,173,225,0.14)] bg-[linear-gradient(135deg,#0a4fa1_0%,#0e8ee8_54%,#38c5ff_100%)] p-5 text-white shadow-[0_24px_60px_rgba(13,92,208,0.28)]">
-                    <p className="text-xs uppercase tracking-[0.28em] text-white/80">Process</p>
-                    <h2 className="mt-4 text-2xl font-semibold">Fast Order Coordination</h2>
-                    <p className="mt-3 text-sm leading-7 text-white/88">
-                      Submit your request online, choose your preferred payment method, and receive
-                      confirmation from our team with the next steps.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <HomeHeroShowcase products={featuredProducts.slice(0, 6)} />
             </div>
           </div>
         </section>
