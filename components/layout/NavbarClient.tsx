@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { BrandMark } from "@/components/layout/BrandMark";
-import { CartIcon, CloseIcon, MenuIcon } from "@/components/ui/Icons";
+import { CartIcon } from "@/components/ui/Icons";
 
 type NavLink = {
   href: string;
@@ -16,8 +15,6 @@ type NavbarClientProps = {
 };
 
 export function NavbarClient({ cartAmount, navLinks }: NavbarClientProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-white/95 backdrop-blur-md">
       <div className="container-shell py-2.5 md:py-3.5">
@@ -58,58 +55,31 @@ export function NavbarClient({ cartAmount, navLinks }: NavbarClientProps) {
           </div>
         </div>
 
-        <div className="flex items-center justify-between gap-3 md:hidden">
-          <div className="min-w-0 shrink">
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 md:hidden">
+          <div className="justify-self-start">
+            <span
+              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--border)] bg-[#fbfbfc] text-base text-neutral-900"
+              aria-label="Language: English"
+            >
+              <span aria-hidden="true">🇬🇧</span>
+            </span>
+          </div>
+
+          <div className="justify-self-center min-w-0">
             <BrandMark compact showText={false} />
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="justify-self-end">
             <Link
               href="/shop"
-              className="inline-flex h-10 items-center gap-2 rounded-xl border border-[var(--border)] bg-[#fbfbfc] px-3 text-sm font-semibold text-neutral-900 transition hover:border-[rgba(17,117,209,0.24)] hover:bg-white"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--border)] bg-[#fbfbfc] text-neutral-900 transition hover:border-[rgba(17,117,209,0.24)] hover:bg-white"
               aria-label={`Cart total ${cartAmount}`}
-              onClick={() => setIsMenuOpen(false)}
             >
               <CartIcon className="h-4 w-4 text-[var(--accent-strong)]" />
-              <span>{cartAmount}</span>
+              <span className="sr-only">{cartAmount}</span>
             </Link>
-
-            <button
-              type="button"
-              onClick={() => setIsMenuOpen((current) => !current)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--border)] bg-[#fbfbfc] text-neutral-900 transition hover:border-[rgba(17,117,209,0.24)] hover:bg-white"
-              aria-expanded={isMenuOpen}
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            >
-              {isMenuOpen ? <CloseIcon className="h-4 w-4" /> : <MenuIcon className="h-4 w-4" />}
-            </button>
           </div>
         </div>
-
-        {isMenuOpen ? (
-          <div className="mt-3 rounded-2xl border border-[var(--border)] bg-white p-3 shadow-[0_12px_30px_rgba(15,23,42,0.06)] md:hidden">
-            <nav className="grid gap-1 text-sm font-medium text-neutral-800">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="rounded-xl px-3 py-3 transition hover:bg-[#f5f7fa] hover:text-neutral-950"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-
-            <div className="mt-3 flex items-center justify-between rounded-xl border border-[var(--border)] bg-[#fbfbfc] px-3 py-2.5">
-              <span className="text-sm font-medium text-neutral-600">Language</span>
-              <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-900">
-                <span aria-hidden="true">🇬🇧</span>
-                <span>EN</span>
-              </span>
-            </div>
-          </div>
-        ) : null}
       </div>
     </header>
   );
