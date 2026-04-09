@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { ArrowRightIcon } from "@/components/ui/Icons";
 
 type ButtonProps = {
   children: ReactNode;
@@ -7,6 +8,7 @@ type ButtonProps = {
   variant?: "primary" | "secondary";
   className?: string;
   external?: boolean;
+  trailingIcon?: boolean;
 };
 
 export function Button({
@@ -15,6 +17,7 @@ export function Button({
   variant = "primary",
   className = "",
   external = false,
+  trailingIcon = false,
 }: ButtonProps) {
   const base =
     "button-motion inline-flex items-center rounded-full px-5 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[rgba(21,152,255,0.28)]";
@@ -32,6 +35,7 @@ export function Button({
         className={`${base} ${tone} ${className}`.trim()}
       >
         {children}
+        {trailingIcon ? <ArrowRightIcon className="ml-2 h-4 w-4" /> : null}
       </a>
     );
   }
@@ -39,6 +43,7 @@ export function Button({
   return (
     <Link href={href} className={`${base} ${tone} ${className}`.trim()}>
       {children}
+      {trailingIcon ? <ArrowRightIcon className="ml-2 h-4 w-4" /> : null}
     </Link>
   );
 }

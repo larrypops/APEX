@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { QuantitySelector } from "@/components/products/QuantitySelector";
 import { Button } from "@/components/ui/Button";
+import { ContactIcon, CartIcon } from "@/components/ui/Icons";
 import type { CurrencyCode } from "@/lib/currency";
 import { formatPrice } from "@/lib/pricing";
 
@@ -49,11 +50,17 @@ export function ProductOrderPanel({
       <QuantitySelector value={quantity} onChange={setQuantity} />
 
       <div className="flex flex-col gap-3 sm:flex-row">
-        <Button href={orderHref} className="flex-1 justify-center">
-          Proceed to Order
+        <Button href={orderHref} className="flex-1 justify-center" trailingIcon>
+          <span className="inline-flex items-center gap-2">
+            <CartIcon className="h-4 w-4" />
+            <span>Proceed to Order</span>
+          </span>
         </Button>
         <Button href="/contact-us" variant="secondary" className="flex-1 justify-center">
-          Request Info
+          <span className="inline-flex items-center gap-2">
+            <ContactIcon className="h-4 w-4" />
+            <span>Request Info</span>
+          </span>
         </Button>
       </div>
 
