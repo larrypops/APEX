@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { Product } from "@/data/products";
 import type { CurrencyCode } from "@/lib/currency";
 import { getProductPricing } from "@/lib/currency";
+import { proxiedImageSrc } from "@/lib/images";
 
 type OrderSummaryProps = {
   product: Product;
@@ -22,7 +23,7 @@ export function OrderSummary({ product, quantity, currency }: OrderSummaryProps)
       <div className="mt-5 overflow-hidden rounded-[24px] border border-[var(--border)] bg-white">
         <div className="border-b border-[var(--border)] p-4">
           <Image
-            src={product.images[0]}
+            src={proxiedImageSrc(product.images[0])}
             alt={product.name}
             width={800}
             height={800}

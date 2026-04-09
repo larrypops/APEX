@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { proxiedImageSrc } from "@/lib/images";
 
 type ProductGalleryProps = {
   name: string;
@@ -16,7 +17,7 @@ export function ProductGallery({ name, images }: ProductGalleryProps) {
     <div className="space-y-3">
       <div className="overflow-hidden rounded-[22px] border border-[var(--border)] bg-white p-3 md:p-4">
         <Image
-          src={activeImage}
+          src={proxiedImageSrc(activeImage)}
           alt={name}
           width={960}
           height={960}
@@ -38,7 +39,7 @@ export function ProductGallery({ name, images }: ProductGalleryProps) {
             }`}
           >
             <Image
-              src={image}
+              src={proxiedImageSrc(image)}
               alt={`${name} thumbnail ${index + 1}`}
               width={240}
               height={240}

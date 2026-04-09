@@ -142,9 +142,6 @@ export default async function ProductPage({ params }: PageProps) {
                     <span>{product.rating.toFixed(2)} out of 5</span>
                     <span>({product.reviewCount} reviews)</span>
                   </div>
-                  <p className="max-w-2xl text-base leading-8 text-neutral-800">
-                    {product.shortDescription}
-                  </p>
                   <div className="flex flex-wrap items-end gap-3 border-t border-[var(--border)] pt-3">
                     {pricing.oldPrice ? (
                       <span className="text-lg text-neutral-400 line-through">

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/data/products";
+import { proxiedImageSrc } from "@/lib/images";
 
 type HomeHeroShowcaseProps = {
   products: Product[];
@@ -36,7 +37,7 @@ export function HomeHeroShowcase({ products }: HomeHeroShowcaseProps) {
         className="group block overflow-hidden rounded-[20px] border border-[#edf1f5] bg-[#f8f9fb]"
       >
         <Image
-          src={activeProduct.images[0]}
+          src={proxiedImageSrc(activeProduct.images[0])}
           alt={activeProduct.name}
           width={900}
           height={1100}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Product } from "@/data/products";
 import type { CurrencyCode } from "@/lib/currency";
 import { getProductPricing } from "@/lib/currency";
+import { proxiedImageSrc } from "@/lib/images";
 import { formatPrice } from "@/lib/pricing";
 
 type ProductCardProps = {
@@ -18,7 +19,7 @@ export function ProductCard({ product, currency }: ProductCardProps) {
       <Link href={`/products/${product.slug}`} className="flex h-full flex-col">
         <div className="relative overflow-hidden border-b border-[#eceff3] bg-[#fafbfc] p-2 sm:p-2.5">
           <Image
-            src={product.images[0]}
+            src={proxiedImageSrc(product.images[0])}
             alt={product.name}
             width={640}
             height={640}
