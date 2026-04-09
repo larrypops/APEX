@@ -1,0 +1,62 @@
+import Link from "next/link";
+import { BrandMark } from "@/components/layout/BrandMark";
+
+const policyLinks = [
+  "Shipping Policy",
+  "Refund & Return Policy",
+  "Privacy Policy",
+  "Terms of Service",
+  "Contact Us",
+  "Tracking Order",
+  "Payment Methods",
+];
+
+export function Footer() {
+  return (
+    <footer className="mt-10 border-t border-black/5 bg-white/70">
+      <div className="container-shell grid gap-8 py-10 md:grid-cols-[1fr_0.9fr]">
+        <div>
+          <BrandMark />
+          <p className="mt-5 text-sm uppercase tracking-[0.24em] text-neutral-500">Follow Us</p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-neutral-950">
+            APEX LASER GROUP enterprise contact hub
+          </h2>
+          <p className="mt-4 max-w-2xl text-base leading-8 text-neutral-600">
+            This refactor keeps the storefront structure while presenting APEX LASER GROUP as a
+            cleaner, more credible B2B laser equipment brand.
+          </p>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2">
+          <div className="rounded-[24px] border border-[var(--border)] bg-white p-5">
+            <p className="text-sm font-semibold text-neutral-500">Contact</p>
+            <div className="mt-4 space-y-2 text-neutral-800">
+              <p>30 N Gould St Num 39904 Sheridan, WY 82801</p>
+              <p>00:00 - 24:00</p>
+              <p>+86-15305304222</p>
+              <p>+1(329)228-8566</p>
+            </div>
+          </div>
+          <div className="rounded-[24px] border border-[var(--border)] bg-white p-5">
+            <p className="text-sm font-semibold text-neutral-500">Policies</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {policyLinks.map((item) => (
+                <Link
+                  key={item}
+                  href="/contact-us"
+                  className="rounded-full border border-[var(--border)] px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-neutral-700"
+                >
+                  {item}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="border-t border-black/5 py-5">
+        <p className="text-center text-sm text-neutral-500">
+          © 2020-2026 APEX LASER GROUP. Enterprise catalog presentation with frontend-only inquiry flows.
+        </p>
+      </div>
+    </footer>
+  );
+}
