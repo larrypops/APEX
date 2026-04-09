@@ -17,9 +17,9 @@ export function ProductDetailsTabs({
   productName,
 }: ProductDetailsTabsProps) {
   return (
-    <div className="surface rounded-[28px] p-4 md:p-6">
+    <div className="surface rounded-[32px] p-4 md:p-6">
       <div className="grid gap-4">
-        <details open className="rounded-[24px] border border-[var(--border)] bg-white p-5">
+        <details open className="rounded-[28px] border border-[rgba(110,156,206,0.18)] bg-[linear-gradient(180deg,#ffffff_0%,#f5faff_100%)] p-5 shadow-[0_20px_40px_rgba(8,18,33,0.08)]">
           <summary className="cursor-pointer list-none text-sm font-semibold uppercase tracking-[0.16em] text-neutral-900">
             Description
           </summary>
@@ -33,7 +33,7 @@ export function ProductDetailsTabs({
           </div>
         </details>
 
-        <details className="rounded-[24px] border border-[var(--border)] bg-white p-5">
+        <details className="rounded-[28px] border border-[rgba(110,156,206,0.18)] bg-[linear-gradient(180deg,#ffffff_0%,#f5faff_100%)] p-5 shadow-[0_20px_40px_rgba(8,18,33,0.08)]">
           <summary className="cursor-pointer list-none text-sm font-semibold uppercase tracking-[0.16em] text-neutral-900">
             Reviews ({reviewCount})
           </summary>

@@ -23,7 +23,7 @@ export const metadata: Metadata = createMetadata({
   keywords: ["enterprise laser catalog", "laser supplier", "industrial laser equipment"],
 });
 
-const featuredProducts = products.slice(0, 8);
+const catalogProducts = products;
 const heroProducts = products.slice(0, 6);
 
 const promoSections = [
@@ -66,7 +66,7 @@ export default async function HomePage() {
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Laser Product Collection",
-      itemListElement: featuredProducts.map((product, index) => ({
+      itemListElement: catalogProducts.map((product, index) => ({
         "@type": "ListItem",
         position: index + 1,
         item: {
@@ -122,16 +122,16 @@ export default async function HomePage() {
           <div className="flex items-end justify-between gap-4">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--accent)]">
-                Featured Products
+                Product Catalog
               </p>
-              <h2 className="section-title mt-2">Featured products from APEX LASER GROUP</h2>
+              <h2 className="section-title mt-2">All APEX LASER GROUP products</h2>
             </div>
             <Link href="/shop" className="text-sm font-semibold text-neutral-800 underline-offset-4 hover:underline">
-              View all products
+              Open catalog page
             </Link>
           </div>
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {featuredProducts.map((product) => (
+          <div className="grid grid-cols-2 gap-4 md:gap-5">
+            {catalogProducts.map((product) => (
               <ProductCard key={product.id} product={product} currency={currency} />
             ))}
           </div>

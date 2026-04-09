@@ -28,20 +28,20 @@ export function ProductOrderPanel({
   );
 
   return (
-    <div className="space-y-4 rounded-[24px] border border-[var(--border)] bg-[var(--accent-soft)] p-5">
+    <div className="space-y-5 rounded-[28px] border border-[rgba(110,156,206,0.18)] bg-[linear-gradient(180deg,rgba(235,246,255,0.98)_0%,rgba(255,255,255,0.98)_100%)] p-5 shadow-[0_24px_60px_rgba(8,18,33,0.1)] md:p-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-neutral-700">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--accent-strong)]">
             Order Request
           </p>
-          <p className="mt-2 text-sm leading-7 text-neutral-700">
+          <p className="mt-2 text-sm leading-7 text-neutral-800">
             Complete your order details and our team will contact you to confirm pricing,
             availability, and your preferred payment method.
           </p>
         </div>
-        <div className="rounded-2xl border border-[var(--border)] bg-white px-4 py-3 text-right">
-          <p className="text-xs uppercase tracking-[0.16em] text-neutral-700">Subtotal</p>
-          <p className="mt-1 text-lg font-semibold text-[var(--accent-strong)]">
+        <div className="rounded-[22px] border border-[rgba(110,156,206,0.18)] bg-[#071628] px-4 py-3 text-right text-white shadow-[0_16px_30px_rgba(8,18,33,0.18)]">
+          <p className="text-[11px] uppercase tracking-[0.2em] text-sky-200">Subtotal</p>
+          <p className="mt-1 text-lg font-semibold text-white">
             {formatPrice(currentPrice * quantity, currency)}
           </p>
         </div>
@@ -64,7 +64,7 @@ export function ProductOrderPanel({
         </Button>
       </div>
 
-      <p className="text-sm leading-7 text-neutral-700">
+      <p className="text-sm leading-7 text-neutral-800">
         Ordering <span className="font-semibold text-neutral-900">{productName}</span> does not
         trigger online payment. We use your request to prepare the order, confirm availability,
         and review the final details with you directly. Shipping costs are not included in the

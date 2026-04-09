@@ -21,7 +21,7 @@ export function RelatedProducts({ currentSlug, relatedSlugs, currency }: Related
         </p>
         <h2 className="section-title mt-2">Continue exploring similar models</h2>
       </div>
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 md:gap-5">
         {related.map((product) => (
           <ProductCard key={product.id} product={product} currency={currency} />
         ))}
