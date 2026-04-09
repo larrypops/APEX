@@ -104,7 +104,7 @@ export default async function ProductPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="container-shell py-6 md:py-10">
-        <div className="mb-6 inline-flex flex-wrap items-center gap-2 rounded-full border border-[rgba(123,173,225,0.16)] bg-white/90 px-4 py-2 text-sm text-neutral-700 shadow-[0_12px_30px_rgba(8,18,33,0.08)]">
+        <div className="mb-6 inline-flex flex-wrap items-center gap-2 rounded-[14px] border border-[var(--border)] bg-white px-4 py-2 text-sm text-neutral-700">
           <Link href="/" className="hover:text-neutral-950">
             Home
           </Link>
@@ -116,24 +116,24 @@ export default async function ProductPage({ params }: PageProps) {
           <span className="text-neutral-900">{product.name}</span>
         </div>
 
-        <section className="surface fade-up rounded-[32px] p-4 md:p-8">
-          <div className="grid gap-8 lg:grid-cols-[1.02fr_0.98fr]">
+        <section className="surface fade-up rounded-[26px] p-4 md:p-6">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.95fr)] lg:items-start">
             <ProductGallery name={product.name} images={product.images} />
 
-            <div className="space-y-6 lg:space-y-7">
-              <div className="rounded-[30px] border border-[rgba(110,156,206,0.16)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(245,250,255,0.96)_100%)] p-5 shadow-[0_24px_60px_rgba(8,18,33,0.1)] md:p-6">
+            <div className="space-y-5">
+              <div className="rounded-[22px] border border-[var(--border)] bg-white p-5 md:p-6">
                 <div className="space-y-4">
                   <div className="flex flex-wrap items-center gap-3">
                     <Badge>{product.category}</Badge>
-                    <span className="rounded-full border border-[rgba(110,156,206,0.18)] bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-neutral-700">
+                    <span className="rounded-full border border-[var(--border)] bg-[#fbfbfc] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-neutral-700">
                       Model {product.model}
                     </span>
                   </div>
-                  <h1 className="text-4xl font-semibold tracking-tight text-neutral-950 md:text-5xl">
+                  <h1 className="text-3xl font-semibold tracking-tight text-neutral-950 md:text-4xl">
                     {product.name}
                   </h1>
                   <div className="flex flex-wrap items-center gap-3 text-sm text-neutral-800">
-                    <span className="inline-flex items-center rounded-full bg-[rgba(245,184,61,0.12)] px-3 py-1 font-semibold text-[var(--gold)]">
+                    <span className="inline-flex items-center rounded-full bg-[rgba(245,184,61,0.14)] px-3 py-1 font-semibold text-[var(--gold)]">
                       {"★".repeat(Math.round(product.rating))}
                     </span>
                     <span>{product.rating.toFixed(2)} out of 5</span>
@@ -161,45 +161,62 @@ export default async function ProductPage({ params }: PageProps) {
                 currency={pricing.currency}
               />
 
-              <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                {[
-                  {
-                    title: "Project Matching",
-                    copy: "Our team helps align power range, application use, and delivery scope before the order is confirmed.",
-                  },
-                  {
-                    title: "Lead Time Review",
-                    copy: "Availability and shipping timelines are verified after your request based on destination and order volume.",
-                  },
-                  {
-                    title: "Business Support",
-                    copy: "We assist distributors, workshops, and industrial buyers with product guidance and order coordination.",
-                  },
-                ].map((item) => (
-                  <div
-                    key={item.title}
-                    className="rounded-[26px] border border-[rgba(110,156,206,0.16)] bg-[linear-gradient(180deg,#ffffff_0%,#f5faff_100%)] p-5 shadow-[0_20px_40px_rgba(8,18,33,0.08)]"
-                  >
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)]">
-                      {item.title}
-                    </p>
-                    <p className="mt-3 text-sm leading-7 text-neutral-800">{item.copy}</p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="rounded-[18px] border border-[var(--border)] bg-white p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)]">
+                    Delivery Information
+                  </p>
+                  <p className="mt-2 text-sm leading-7 text-neutral-700">
+                    Delivery timing and shipping scope are confirmed after your order request based on destination, quantity, and stock review.
+                  </p>
+                </div>
+                <div className="rounded-[18px] border border-[var(--border)] bg-white p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)]">
+                    Order Confirmation
+                  </p>
+                  <p className="mt-2 text-sm leading-7 text-neutral-700">
+                    We review the selected product, quantity, pricing, and preferred payment method before confirming the order with you directly.
+                  </p>
+                </div>
+                <div className="rounded-[18px] border border-[var(--border)] bg-white p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)]">
+                    Support
+                  </p>
+                  <p className="mt-2 text-sm leading-7 text-neutral-700">
+                    Our team assists with product questions, project matching, delivery planning, and business inquiries before and after submission.
+                  </p>
+                </div>
+                <div className="rounded-[18px] border border-[var(--border)] bg-white p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)]">
+                    Preferred Payment Methods
+                  </p>
+                  <div className="mt-3 flex flex-wrap items-center gap-3">
+                    {[
+                      { label: "Visa", logo: "/images/payments/visa.svg" },
+                      { label: "Mastercard", logo: "/images/payments/mastercard.svg" },
+                      { label: "PayPal", logo: "/images/payments/paypal.svg" },
+                    ].map((item) => (
+                      <div
+                        key={item.label}
+                        className="flex h-12 items-center justify-center rounded-[12px] border border-[var(--border)] bg-[#fbfbfc] px-3"
+                      >
+                        <Image
+                          src={item.logo}
+                          alt={`${item.label} logo`}
+                          width={76}
+                          height={34}
+                          className="h-auto w-auto"
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
 
-              <div className="rounded-[30px] border border-[rgba(110,156,206,0.16)] bg-[linear-gradient(180deg,#ffffff_0%,#f5faff_100%)] p-5 shadow-[0_20px_40px_rgba(8,18,33,0.08)] md:p-6">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-900">
-                      Preferred Payment Options
-                    </h2>
-                    <p className="mt-2 text-sm leading-7 text-neutral-800">
-                      Payment is not processed online. Your preferred method is collected during the order request and confirmed by our team afterwards.
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-3 text-sm text-neutral-700">
-                    <span className="font-semibold text-neutral-900">Share:</span>
+              <div className="rounded-[18px] border border-[var(--border)] bg-white p-4 md:p-5">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="text-sm font-semibold text-neutral-900">Share this product</p>
+                  <div className="flex flex-wrap items-center gap-2 text-sm text-neutral-700">
                     {[
                       { label: "Facebook", icon: FacebookIcon },
                       { label: "X", icon: XIcon },
@@ -209,7 +226,7 @@ export default async function ProductPage({ params }: PageProps) {
                     ].map((item) => (
                       <span
                         key={item.label}
-                        className="rounded-full border border-[var(--border)] bg-white px-3 py-2 text-neutral-800"
+                        className="rounded-full border border-[var(--border)] bg-[#fbfbfc] px-3 py-2 text-neutral-800"
                       >
                         <span className="inline-flex items-center gap-2">
                           <item.icon className="h-4 w-4" />
@@ -218,32 +235,6 @@ export default async function ProductPage({ params }: PageProps) {
                       </span>
                     ))}
                   </div>
-                </div>
-
-                <div className="mt-5 grid gap-3 sm:grid-cols-3">
-                  {[
-                    { label: "Visa", logo: "/images/payments/visa.svg" },
-                    { label: "Mastercard", logo: "/images/payments/mastercard.svg" },
-                    { label: "PayPal", logo: "/images/payments/paypal.svg" },
-                  ].map((item) => (
-                    <div
-                      key={item.label}
-                      className="rounded-[22px] border border-[rgba(110,156,206,0.16)] bg-white p-4 shadow-[0_16px_30px_rgba(8,18,33,0.06)]"
-                    >
-                      <div className="flex h-14 items-center justify-center rounded-[18px] border border-[rgba(120,162,200,0.14)] bg-[linear-gradient(180deg,#ffffff_0%,#eef7ff_100%)] px-3">
-                        <Image
-                          src={item.logo}
-                          alt={`${item.label} logo`}
-                          width={88}
-                          height={40}
-                          className="h-auto w-auto"
-                        />
-                      </div>
-                      <p className="mt-3 text-center text-sm font-semibold text-neutral-900">
-                        {item.label}
-                      </p>
-                    </div>
-                  ))}
                 </div>
               </div>
             </div>

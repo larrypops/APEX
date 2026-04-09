@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import type { Review } from "@/data/products";
 import { ReviewList } from "@/components/products/ReviewList";
 
@@ -16,31 +19,65 @@ export function ProductDetailsTabs({
   reviewCount,
   productName,
 }: ProductDetailsTabsProps) {
-  return (
-    <div className="surface rounded-[32px] p-4 md:p-6">
-      <div className="grid gap-4">
-        <details open className="rounded-[28px] border border-[rgba(110,156,206,0.18)] bg-[linear-gradient(180deg,#ffffff_0%,#f5faff_100%)] p-5 shadow-[0_20px_40px_rgba(8,18,33,0.08)]">
-          <summary className="cursor-pointer list-none text-sm font-semibold uppercase tracking-[0.16em] text-neutral-900">
-            Description
-          </summary>
-          <div className="prose-copy pt-5">
-            <p>{fullDescription}</p>
-            <ul>
-              {specs.map((spec) => (
-                <li key={spec}>{spec}</li>
-              ))}
-            </ul>
-          </div>
-        </details>
+  const [activeTab, setActiveTab] = useState<"description" | "info" | "reviews">("description");
 
-        <details className="rounded-[28px] border border-[rgba(110,156,206,0.18)] bg-[linear-gradient(180deg,#ffffff_0%,#f5faff_100%)] p-5 shadow-[0_20px_40px_rgba(8,18,33,0.08)]">
-          <summary className="cursor-pointer list-none text-sm font-semibold uppercase tracking-[0.16em] text-neutral-900">
-            Reviews ({reviewCount})
-          </summary>
-          <div className="pt-5">
-            <ReviewList reviews={reviews} productName={productName} />
-          </div>
-        </details>
+  const tabs = [
+    { key: "description", label: "Description" },
+    { key: "info", label: "Additional Information" },
+    { key: "reviews", label: `Reviews (${reviewCount})` },
+  ] as const;
+
+  return (
+    <div className="surface rounded-[24px] p-4 md:p-6">
+      <div className="flex flex-wrap gap-2 border-b border-[var(--border)] pb-4">
+        {tabs.map((tab) => (
+          <button
+            key={tab.key}
+            type="button"
+            onClick={() => setActiveTab(tab.key)}
+            className={`rounded-[12px] px-4 py-2 text-sm font-semibold transition ${
+              activeTab === tab.key
+                ? "bg-neutral-950 text-white"
+                : "border border-[var(--border)] bg-white text-neutral-700 hover:text-neutral-950"
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="pt-5">
+        {activeTab === "description" ? (
+          fullDescription ? (
+            <div className="prose-copy max-w-none">
+              <p>{fullDescription}</p>
+            </div>
+          ) : (
+            <p className="text-sm leading-7 text-neutral-700">
+              Product description details will be confirmed during order review.
+            </p>
+          )
+        ) : null}
+
+        {activeTab === "info" ? (
+          specs.length > 0 ? (
+            <div className="grid gap-px overflow-hidden rounded-[18px] border border-[var(--border)] bg-[var(--border)]">
+              {specs.map((spec) => (
+                <div key={spec} className="bg-white px-4 py-3 text-sm text-neutral-800">
+                  {spec}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm leading-7 text-neutral-700">
+              Additional product information will be confirmed during the order review process.
+            </p>
+          )
+        ) : null}
+
+        {activeTab === "reviews" ? (
+          <ReviewList reviews={reviews} productName={productName} />
+        ) : null}
       </div>
     </div>
   );

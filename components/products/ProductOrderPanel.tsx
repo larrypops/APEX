@@ -1,8 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { QuantitySelector } from "@/components/products/QuantitySelector";
-import { Button } from "@/components/ui/Button";
 import { ContactIcon, CartIcon } from "@/components/ui/Icons";
 import type { CurrencyCode } from "@/lib/currency";
 import { formatPrice } from "@/lib/pricing";
@@ -26,10 +26,14 @@ export function ProductOrderPanel({
     () => `/order?product=${encodeURIComponent(productSlug)}&quantity=${quantity}`,
     [productSlug, quantity],
   );
+  const infoHref = useMemo(
+    () => `/contact-us?product=${encodeURIComponent(productSlug)}`,
+    [productSlug],
+  );
 
   return (
-    <div className="space-y-5 rounded-[28px] border border-[rgba(110,156,206,0.18)] bg-[linear-gradient(180deg,rgba(235,246,255,0.98)_0%,rgba(255,255,255,0.98)_100%)] p-5 shadow-[0_24px_60px_rgba(8,18,33,0.1)] md:p-6">
-      <div className="flex items-start justify-between gap-4">
+    <div className="space-y-5 rounded-[20px] border border-[var(--border)] bg-white p-5 md:p-6">
+      <div className="flex flex-col gap-4 border-b border-[var(--border)] pb-5 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--accent-strong)]">
             Order Request
@@ -39,9 +43,9 @@ export function ProductOrderPanel({
             availability, and your preferred payment method.
           </p>
         </div>
-        <div className="rounded-[22px] border border-[rgba(110,156,206,0.18)] bg-[#071628] px-4 py-3 text-right text-white shadow-[0_16px_30px_rgba(8,18,33,0.18)]">
-          <p className="text-[11px] uppercase tracking-[0.2em] text-sky-200">Subtotal</p>
-          <p className="mt-1 text-lg font-semibold text-white">
+        <div className="rounded-[16px] border border-[var(--border)] bg-[#fbfbfc] px-4 py-3 text-left sm:text-right">
+          <p className="text-[11px] uppercase tracking-[0.2em] text-neutral-500">Subtotal</p>
+          <p className="mt-1 text-lg font-semibold text-neutral-950">
             {formatPrice(currentPrice * quantity, currency)}
           </p>
         </div>
@@ -50,26 +54,27 @@ export function ProductOrderPanel({
       <QuantitySelector value={quantity} onChange={setQuantity} />
 
       <div className="flex flex-col gap-3 sm:flex-row">
-        <Button href={orderHref} className="flex-1 justify-center" trailingIcon>
-          <span className="inline-flex items-center gap-2">
-            <CartIcon className="h-4 w-4" />
-            <span>Proceed to Order</span>
-          </span>
-        </Button>
-        <Button href="/contact-us" variant="secondary" className="flex-1 justify-center">
-          <span className="inline-flex items-center gap-2">
-            <ContactIcon className="h-4 w-4" />
-            <span>Request Info</span>
-          </span>
-        </Button>
+        <Link
+          href={orderHref}
+          className="button-motion inline-flex flex-1 items-center justify-center gap-2 rounded-[14px] bg-[var(--accent-strong)] px-5 py-3 text-sm font-semibold text-white"
+        >
+          <CartIcon className="h-4 w-4" />
+          <span>Order Now</span>
+        </Link>
+        <Link
+          href={infoHref}
+          className="button-motion inline-flex flex-1 items-center justify-center gap-2 rounded-[14px] border border-[var(--border)] bg-white px-5 py-3 text-sm font-semibold text-neutral-900"
+        >
+          <ContactIcon className="h-4 w-4" />
+          <span>Request Information</span>
+        </Link>
       </div>
 
-      <p className="text-sm leading-7 text-neutral-800">
+      <div className="rounded-[16px] border border-[var(--border)] bg-[#fbfbfc] px-4 py-3 text-sm leading-7 text-neutral-700">
         Ordering <span className="font-semibold text-neutral-900">{productName}</span> does not
         trigger online payment. We use your request to prepare the order, confirm availability,
-        and review the final details with you directly. Shipping costs are not included in the
-        displayed subtotal.
-      </p>
+        and review delivery and payment preferences with you directly.
+      </div>
     </div>
   );
 }
