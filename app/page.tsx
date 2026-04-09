@@ -9,7 +9,6 @@ import {
   YouTubeIcon,
 } from "@/components/ui/Icons";
 import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
 import { ProductCard } from "@/components/products/ProductCard";
 import { products } from "@/data/products";
 import { getPreferredCurrency } from "@/lib/currency-server";
@@ -92,28 +91,21 @@ export default async function HomePage() {
       />
       <div className="container-shell flex flex-col gap-8 py-6 md:py-10">
         <section className="surface fade-up rounded-[28px] p-4 md:p-6">
-          <div className="rounded-[22px] bg-[linear-gradient(180deg,rgba(245,250,255,0.98)_0%,rgba(255,255,255,0.96)_100%)] p-6 md:p-10">
-            <div className="grid items-center gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:gap-12">
-              <div className="space-y-5">
-                <Badge>APEX LASER GROUP</Badge>
-                <div className="space-y-4">
-                  <h1 className="text-4xl font-semibold tracking-tight text-neutral-950 md:text-5xl md:leading-[1.02]">
-                    High-performance laser equipment for workshops, resellers, and industrial buyers.
-                  </h1>
-                  <p className="max-w-2xl text-base leading-8 text-neutral-700 md:text-lg">
-                    Explore laser lights, laser igniters, and laser machines with clear product
-                    pages, visible pricing, and a fast order-request experience.
-                  </p>
-                  <p className="text-sm leading-7 text-neutral-700">
-                    Prices are shown in USD or EUR based on your region. Shipping is confirmed with
-                    your order.
-                  </p>
-                </div>
-                <Button href="/shop" className="px-6 py-3.5 text-base" trailingIcon>
-                  Browse Catalog
-                </Button>
-              </div>
-              <HomeHeroShowcase products={heroProducts} />
+          <div className="mx-auto max-w-[560px] rounded-[24px] bg-white p-4 shadow-[0_18px_36px_rgba(8,18,33,0.08)] md:p-6">
+            <HomeHeroShowcase products={heroProducts} />
+            <div className="mt-5 rounded-[20px] border border-[#f1df97] bg-[#fff7cc] px-4 py-3 text-center text-sm font-semibold text-[#6e5200]">
+              Warning: Minors are prohibited from purchasing!
+            </div>
+            <div className="mt-5 space-y-3 text-center">
+              <p className="text-sm font-semibold text-[var(--accent-strong)]">
+                Welcome to inquire!
+              </p>
+              <h1 className="text-4xl font-semibold uppercase tracking-tight text-neutral-950 md:text-5xl">
+                LASER PRODUCT
+              </h1>
+              <p className="text-base font-medium text-neutral-800">
+                All Prices Are in US Dollars
+              </p>
             </div>
           </div>
         </section>

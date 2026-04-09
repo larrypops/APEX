@@ -4,11 +4,16 @@ import Link from "next/link";
 type BrandMarkProps = {
   compact?: boolean;
   light?: boolean;
+  showText?: boolean;
 };
 
-export function BrandMark({ compact = false, light = false }: BrandMarkProps) {
+export function BrandMark({
+  compact = false,
+  light = false,
+  showText = true,
+}: BrandMarkProps) {
   return (
-    <Link href="/" className="flex items-center gap-3">
+    <Link href="/" aria-label="APEX LASER GROUP home" className="flex items-center gap-3">
       <div
         className={`overflow-hidden rounded-2xl border border-white/10 bg-[#071121] shadow-[0_14px_34px_rgba(5,14,32,0.24)] ${
           compact ? "h-14 w-14" : "h-16 w-16"
@@ -23,9 +28,11 @@ export function BrandMark({ compact = false, light = false }: BrandMarkProps) {
           priority={compact}
         />
       </div>
-      <p className={`text-base font-semibold md:text-lg ${light ? "text-white" : "text-slate-950"}`}>
-        APEX LASER GROUP
-      </p>
+      {showText ? (
+        <p className={`text-base font-semibold md:text-lg ${light ? "text-white" : "text-slate-950"}`}>
+          APEX LASER GROUP
+        </p>
+      ) : null}
     </Link>
   );
 }
