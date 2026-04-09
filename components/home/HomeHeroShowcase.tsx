@@ -3,42 +3,33 @@ import Link from "next/link";
 import type { Product } from "@/data/products";
 
 type HomeHeroShowcaseProps = {
-  products: Product[];
+  product: Product;
 };
 
-export function HomeHeroShowcase({ products }: HomeHeroShowcaseProps) {
-  const loopProducts = [...products, ...products];
-
+export function HomeHeroShowcase({ product }: HomeHeroShowcaseProps) {
   return (
-    <div className="relative overflow-hidden rounded-[28px] border border-[rgba(112,198,255,0.18)] bg-[linear-gradient(160deg,rgba(6,18,37,0.96)_0%,rgba(10,28,56,0.92)_52%,rgba(15,46,92,0.9)_100%)] p-3 shadow-[0_26px_80px_rgba(3,10,26,0.42)] md:p-4">
-      <div className="hero-marquee">
-        <div className="hero-marquee-track">
-          {loopProducts.map((product, index) => (
-            <Link
-              key={`${product.id}-${index}`}
-              href={`/products/${product.slug}`}
-              className="group relative w-[280px] shrink-0 overflow-hidden rounded-[24px] border border-[rgba(121,203,255,0.14)] bg-white/6 transition duration-300 hover:-translate-y-1 hover:border-[rgba(133,226,255,0.42)] md:w-[360px]"
-            >
-              <Image
-                src={product.images[0]}
-                alt={product.name}
-                width={800}
-                height={800}
-                sizes="(max-width: 768px) 280px, 360px"
-                className="aspect-[4/5] w-full object-cover transition duration-300 group-hover:scale-[1.03]"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent_0%,rgba(3,10,26,0.78)_100%)] p-4 md:p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-200">
-                  Model {product.model}
-                </p>
-                <h3 className="mt-2 line-clamp-2 text-base font-semibold text-white md:text-lg">
-                  {product.name}
-                </h3>
-              </div>
-            </Link>
-          ))}
+    <Link
+      href={`/products/${product.slug}`}
+      className="group block overflow-hidden rounded-[28px] border border-[rgba(123,173,225,0.16)] bg-white shadow-[0_24px_60px_rgba(9,24,49,0.12)]"
+    >
+      <div className="relative bg-[linear-gradient(180deg,#eef8ff_0%,#ffffff_100%)] p-3 md:p-4">
+        <Image
+          src={product.images[0]}
+          alt={product.name}
+          width={900}
+          height={1100}
+          sizes="(max-width: 1024px) 100vw, 42vw"
+          className="aspect-[4/5] w-full rounded-[22px] object-cover transition duration-300 group-hover:scale-[1.02]"
+          priority
+        />
+        <div className="absolute inset-x-5 bottom-5 rounded-[22px] bg-[linear-gradient(180deg,rgba(7,17,32,0.04)_0%,rgba(7,17,32,0.82)_100%)] p-4 md:inset-x-6 md:bottom-6 md:p-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
+            Model {product.model}
+          </p>
+          <h2 className="mt-2 text-lg font-semibold text-white md:text-2xl">{product.name}</h2>
+          <p className="mt-2 text-sm text-white/90">View product details</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

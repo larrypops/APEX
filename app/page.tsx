@@ -24,6 +24,9 @@ export const metadata: Metadata = createMetadata({
 });
 
 const featuredProducts = products.slice(0, 8);
+const heroProduct =
+  products.find((product) => product.category.toLowerCase().includes("machine")) ??
+  featuredProducts[0];
 
 const promoSections = [
   {
@@ -91,55 +94,28 @@ export default async function HomePage() {
       />
       <div className="container-shell flex flex-col gap-8 py-6 md:py-10">
         <section className="surface fade-up rounded-[28px] p-4 md:p-6">
-          <div className="rounded-[22px] border border-[rgba(123,173,225,0.16)] bg-[linear-gradient(145deg,rgba(238,247,255,0.97)_0%,rgba(255,255,255,0.96)_38%,rgba(226,242,255,0.94)_100%)] p-6 md:p-10">
-            <div className="mb-6 flex flex-wrap items-center gap-3">
-              <Badge variant="warning">Important Information</Badge>
-              <p className="text-sm font-medium text-neutral-700">
-                Review product specifications, pricing, and availability before submitting your
-                order request. Our team will confirm the final details, delivery options, and
-                preferred payment method with you directly.
-              </p>
-            </div>
-            <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-              <div className="space-y-6">
-                <Badge>Professional Laser Equipment</Badge>
+          <div className="rounded-[22px] bg-[linear-gradient(180deg,rgba(245,250,255,0.98)_0%,rgba(255,255,255,0.96)_100%)] p-6 md:p-10">
+            <div className="grid items-center gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:gap-12">
+              <div className="space-y-5">
+                <Badge>APEX LASER GROUP</Badge>
                 <div className="space-y-4">
-                  <h1 className="section-title max-w-3xl">
-                    Reliable laser equipment for distributors, workshops, and industrial buyers.
+                  <h1 className="text-4xl font-semibold tracking-tight text-neutral-950 md:text-5xl md:leading-[1.02]">
+                    High-performance laser equipment for workshops, resellers, and industrial buyers.
                   </h1>
-                  <p className="section-copy max-w-2xl">
-                    Discover laser lights, laser igniters, and industrial laser machines presented
-                    in a clear catalog built for easy comparison, faster decisions, and direct
-                    order requests.
+                  <p className="max-w-2xl text-base leading-8 text-neutral-700 md:text-lg">
+                    Explore laser lights, laser igniters, and laser machines with clear product
+                    pages, visible pricing, and a fast order-request experience.
                   </p>
                   <p className="text-sm leading-7 text-neutral-600">
-                    Official catalog prices are available in USD and EUR. Shipping costs are not
-                    included, and all orders are reviewed by our team before confirmation.
+                    Prices are shown in USD or EUR based on your region. Shipping is confirmed with
+                    your order.
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-3">
-                  <Button href="/shop">Browse Catalog</Button>
-                  <Button href="/contact-us" variant="secondary">
-                    Talk to Sales
-                  </Button>
-                </div>
-                <div className="grid gap-4 sm:grid-cols-3">
-                  {[
-                    { label: "Catalog Range", value: "5W to 2000W" },
-                    { label: "Displayed Prices", value: "USD / EUR by Region" },
-                    { label: "Ordering", value: "Secure Request Flow" },
-                  ].map((stat) => (
-                    <div
-                      key={stat.label}
-                      className="rounded-2xl border border-[var(--border)] bg-white/80 p-4"
-                    >
-                      <p className="text-sm text-neutral-600">{stat.label}</p>
-                      <p className="mt-2 text-lg font-semibold text-neutral-950">{stat.value}</p>
-                    </div>
-                  ))}
-                </div>
+                <Button href="/shop" className="px-6 py-3.5 text-base" trailingIcon>
+                  Browse Catalog
+                </Button>
               </div>
-              <HomeHeroShowcase products={featuredProducts.slice(0, 6)} />
+              <HomeHeroShowcase product={heroProduct} />
             </div>
           </div>
         </section>
