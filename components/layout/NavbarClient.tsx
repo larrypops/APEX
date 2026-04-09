@@ -21,26 +21,24 @@ export function NavbarClient({ cartAmount, navLinks }: NavbarClientProps) {
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-white/95 backdrop-blur-md">
       <div className="container-shell py-2.5 md:py-3.5">
-        <div className="hidden items-center justify-between gap-8 md:flex">
-          <div className="shrink-0">
+        <div className="hidden grid-cols-[1fr_auto_1fr] items-center gap-6 md:grid lg:gap-8">
+          <div className="justify-self-start">
             <BrandMark compact={false} />
           </div>
 
-          <div className="flex items-center justify-end gap-4 lg:gap-6">
-            <nav className="flex items-center gap-1 text-sm font-medium text-neutral-700 lg:gap-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="rounded-lg px-3 py-2 whitespace-nowrap transition hover:bg-[#f5f7fa] hover:text-neutral-950"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
+          <nav className="justify-self-center flex items-center gap-1 text-sm font-medium text-neutral-700 lg:gap-2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="rounded-lg px-3 py-2 whitespace-nowrap transition hover:bg-[#f5f7fa] hover:text-neutral-950"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
 
-            <span className="h-6 w-px bg-[var(--border)]" aria-hidden="true" />
-
+          <div className="flex items-center justify-self-end gap-4 lg:gap-6">
             <span className="inline-flex h-10 items-center gap-1.5 rounded-xl border border-[var(--border)] bg-[#fbfbfc] px-3 text-sm font-semibold text-neutral-900">
               <span className="text-base" aria-hidden="true">
                 🇬🇧
