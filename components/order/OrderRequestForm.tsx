@@ -156,6 +156,31 @@ export function OrderRequestForm({ product, quantity, currency }: OrderRequestFo
           <Field label="Last Name" name="lastName" placeholder="Enter your last name" error={errors.lastName} />
           <div className="md:col-span-2">
             <label className="block">
+              <span className="mb-2 block text-sm font-semibold text-neutral-900">Country</span>
+              <div className="relative">
+                <select
+                  name="countrySelect"
+                  value={phoneCountryCode}
+                  onChange={(event) => setPhoneCountryCode(event.target.value)}
+                  className="w-full appearance-none rounded-[22px] border border-[rgba(120,162,200,0.18)] bg-[rgba(247,251,255,0.92)] px-4 py-3 pr-10 text-sm text-neutral-900 outline-none transition focus:border-[var(--accent)] focus:bg-white"
+                >
+                  {phoneCountries.map((country) => (
+                    <option key={country.code} value={country.code}>
+                      {flagEmoji(country.code)} {country.name} ({country.dialCode})
+                    </option>
+                  ))}
+                </select>
+                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500">
+                  v
+                </span>
+              </div>
+              <p className="mt-2 text-sm text-neutral-700">
+                Changing the country automatically updates the phone code below.
+              </p>
+            </label>
+          </div>
+          <div className="md:col-span-2">
+            <label className="block">
               <span className="mb-2 block text-sm font-semibold text-neutral-900">Phone Number</span>
               <div className="flex items-center gap-3 rounded-[22px] border border-[rgba(120,162,200,0.18)] bg-[rgba(247,251,255,0.92)] px-4 py-3 transition focus-within:border-[var(--accent)] focus-within:bg-white">
                   <span className="flex shrink-0 items-center gap-2 rounded-full bg-[var(--accent-soft)] px-3 py-1 text-sm font-semibold text-[var(--accent-strong)]">
@@ -187,31 +212,6 @@ export function OrderRequestForm({ product, quantity, currency }: OrderRequestFo
           <Field label="Email Address" name="email" type="email" placeholder="Enter your email address" error={errors.email} />
           <Field label="City" name="city" placeholder="City" />
           <Field label="State / Region" name="state" placeholder="State or region" />
-          <div className="md:col-span-2">
-            <label className="block">
-              <span className="mb-2 block text-sm font-semibold text-neutral-900">Country</span>
-              <div className="relative">
-                <select
-                  name="countrySelect"
-                  value={phoneCountryCode}
-                  onChange={(event) => setPhoneCountryCode(event.target.value)}
-                  className="w-full appearance-none rounded-[22px] border border-[rgba(120,162,200,0.18)] bg-[rgba(247,251,255,0.92)] px-4 py-3 pr-10 text-sm text-neutral-900 outline-none transition focus:border-[var(--accent)] focus:bg-white"
-                >
-                  {phoneCountries.map((country) => (
-                    <option key={country.code} value={country.code}>
-                      {flagEmoji(country.code)} {country.name} ({country.dialCode})
-                    </option>
-                  ))}
-                </select>
-                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500">
-                  v
-                </span>
-              </div>
-              <p className="mt-2 text-sm text-neutral-700">
-                Changing the country automatically updates the phone code above.
-              </p>
-            </label>
-          </div>
           <div className="md:col-span-2">
             <Field
               label="Delivery Address"
