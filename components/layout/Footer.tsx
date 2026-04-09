@@ -19,11 +19,11 @@ export function Footer() {
           <BrandMark />
           <p className="mt-5 text-sm uppercase tracking-[0.24em] text-neutral-500">Follow Us</p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-neutral-950">
-            APEX LASER GROUP enterprise contact hub
+            APEX LASER GROUP customer support and sales contact
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-8 text-neutral-600">
-            This refactor keeps the storefront structure while presenting APEX LASER GROUP as a
-            cleaner, more credible B2B laser equipment brand.
+            Contact our team for product details, order assistance, bulk requests, and delivery
+            coordination for laser equipment and machine orders.
           </p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2">
@@ -54,7 +54,7 @@ export function Footer() {
       </div>
       <div className="border-t border-black/5 py-5">
         <p className="text-center text-sm text-neutral-500">
-          © 2020-2026 APEX LASER GROUP. Enterprise catalog presentation with frontend-only inquiry flows.
+          © 2020-2026 APEX LASER GROUP. All rights reserved. Product information and order requests are handled directly by our team.
         </p>
       </div>
     </footer>

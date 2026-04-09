@@ -20,23 +20,23 @@ const featuredProducts = products.slice(0, 8);
 
 const promoSections = [
   {
-    title: "Creative Products",
+    title: "Product Applications",
     copy:
-      "A curated mix of compact laser lights, high-output igniters, and workshop-ready machines displayed in a simpler, more legible catalog.",
-    items: ["Laser Lens", "Signal Beam", "Workshop Picks", "Engraving Essentials"],
+      "Explore compact laser units, high-output igniters, and industrial systems selected for demonstrations, workshop integration, production support, and project-specific sourcing.",
+    items: ["Compact Laser Units", "High-Power Igniters", "Workshop Solutions", "Industrial Systems"],
   },
   {
-    title: "Live Product Highlights",
+    title: "Why Buyers Choose APEX",
     copy:
-      "The source storefront emphasizes livestream discovery. This rebuild keeps that energy with product-first promotional cards and a clear catalog path.",
-    items: ["Daily Deals", "New Drops", "Top Rated", "Fast Inquiry"],
+      "We present laser equipment with clear specifications, visible pricing, and a direct order-request process designed for faster qualification and smoother customer communication.",
+    items: ["Clear Specifications", "Responsive Support", "International Supply", "Fast Order Requests"],
   },
 ];
 
 const trustStats = [
-  { label: "Recent Orders", value: "124", note: "Updated from visible storefront cues" },
-  { label: "VIP Renewals", value: "37", note: "Repeat buyers asking for higher wattage models" },
-  { label: "New Signups", value: "58", note: "Interest across hobby, demo, and machine categories" },
+  { label: "Order Requests", value: "124", note: "Customers requesting compact units, igniters, and machine configurations" },
+  { label: "Repeat Buyers", value: "37", note: "Returning clients upgrading to higher-output models and repeat supply orders" },
+  { label: "New Inquiries", value: "58", note: "Fresh demand from distributors, workshops, and industrial buyers" },
 ];
 
 const paymentProofs = Array.from({ length: 6 }, (_, index) => ({
@@ -91,41 +91,41 @@ export default async function HomePage() {
         <section className="surface fade-up rounded-[28px] p-4 md:p-6">
           <div className="rounded-[22px] border border-[var(--border)] bg-[linear-gradient(135deg,#fff6ef_0%,#ffffff_44%,#fff5d9_100%)] p-6 md:p-10">
             <div className="mb-6 flex flex-wrap items-center gap-3">
-              <Badge variant="warning">Warning</Badge>
+              <Badge variant="warning">Important Information</Badge>
               <p className="text-sm font-medium text-neutral-700">
-                Product pages are optimized for direct inquiry, specification review, and project
-                matching. Sensitive or restricted product decisions should always be handled through
-                compliant enterprise channels.
+                Review product specifications, pricing, and availability before submitting your
+                order request. Our team will confirm the final details, delivery options, and
+                preferred payment method with you directly.
               </p>
             </div>
             <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
               <div className="space-y-6">
-                <Badge>Laser Product</Badge>
+                <Badge>Professional Laser Equipment</Badge>
                 <div className="space-y-4">
                   <h1 className="section-title max-w-3xl">
-                    APEX LASER GROUP laser catalog for enterprise buyers and project-based procurement.
+                    Reliable laser equipment for distributors, workshops, and industrial buyers.
                   </h1>
                   <p className="section-copy max-w-2xl">
-                    Browse laser lights, laser igniters, and industrial laser machines through a
-                    cleaner B2B storefront built for discoverability, specification review, and
-                    direct inquiry.
+                    Discover laser lights, laser igniters, and industrial laser machines presented
+                    in a clear catalog built for easy comparison, faster decisions, and direct
+                    order requests.
                   </p>
                   <p className="text-sm leading-7 text-neutral-600">
-                    Official catalog prices are available in USD and EUR, shipping costs are not
-                    included, and minors are not allowed to purchase.
+                    Official catalog prices are available in USD and EUR. Shipping costs are not
+                    included, and all orders are reviewed by our team before confirmation.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-3">
                   <Button href="/shop">Browse Catalog</Button>
                   <Button href="/contact-us" variant="secondary">
-                    Request Product Info
+                    Talk to Sales
                   </Button>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-3">
                   {[
                     { label: "Catalog Range", value: "5W to 2000W" },
-                    { label: "Visible Pricing", value: "USD / EUR Geo Pricing" },
-                    { label: "Actions", value: "Order Request Flow" },
+                    { label: "Displayed Prices", value: "USD / EUR by Region" },
+                    { label: "Ordering", value: "Secure Request Flow" },
                   ].map((stat) => (
                     <div
                       key={stat.label}
@@ -139,19 +139,19 @@ export default async function HomePage() {
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="rounded-[24px] border border-[var(--border)] bg-neutral-950 p-5 text-white">
-                  <p className="text-xs uppercase tracking-[0.28em] text-white/60">Offline</p>
-                  <h2 className="mt-6 text-2xl font-semibold">Facebook Stream</h2>
+                  <p className="text-xs uppercase tracking-[0.28em] text-white/60">Support</p>
+                  <h2 className="mt-6 text-2xl font-semibold">Dedicated Sales Assistance</h2>
                   <p className="mt-3 text-sm leading-7 text-white/72">
-                    Social-facing product content reworked into a calmer, faster, and more
-                    search-friendly enterprise presentation.
+                    Speak with our team about the right model, technical requirements, shipping
+                    options, and order preparation for your market.
                   </p>
                 </div>
                 <div className="rounded-[24px] border border-[var(--border)] bg-[var(--accent)] p-5 text-white">
-                  <p className="text-xs uppercase tracking-[0.28em] text-white/70">Live</p>
-                  <h2 className="mt-6 text-2xl font-semibold">TikTok Highlights</h2>
+                  <p className="text-xs uppercase tracking-[0.28em] text-white/70">Process</p>
+                  <h2 className="mt-6 text-2xl font-semibold">Fast Order Coordination</h2>
                   <p className="mt-3 text-sm leading-7 text-white/80">
-                    Discovery-focused content translated into lightweight SSR sections with clearer
-                    hierarchy, stronger copy, and better mobile readability.
+                    Submit your request online, choose your preferred payment method, and receive
+                    confirmation from our team with the next steps.
                   </p>
                 </div>
                 <div className="sm:col-span-2 rounded-[24px] border border-[var(--border)] bg-white p-4">
@@ -224,8 +224,8 @@ export default async function HomePage() {
               <h2 className="section-title mt-2">Recent orders, renewals, and signups</h2>
             </div>
             <p className="max-w-2xl text-sm leading-7 text-neutral-600">
-              This section translates storefront trust signals into cleaner B2B proof points for
-              APEX LASER GROUP, with static sample metrics ready to be replaced by real business data.
+              A quick overview of buyer activity and customer interest across the APEX LASER GROUP
+              catalog.
             </p>
           </div>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -247,11 +247,12 @@ export default async function HomePage() {
         <section className="fade-up grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="surface rounded-[28px] p-6 md:p-8">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--accent)]">
-              Recent Payments
+              Customer Confidence
             </p>
-            <h2 className="section-title mt-2">Payment proof gallery</h2>
+            <h2 className="section-title mt-2">Order and payment reference area</h2>
             <p className="mt-4 max-w-2xl text-base leading-8 text-neutral-600">
-              A responsive grid ready for replacing with real approved assets later.
+              This section can be updated with approved order references, payment confirmations, or
+              fulfillment proof shared by your business team.
             </p>
             <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3">
               {paymentProofs.map((proof) => (

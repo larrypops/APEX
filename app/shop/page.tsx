@@ -22,11 +22,11 @@ export default async function ShopPage() {
         <Badge>Shop</Badge>
         <h1 className="section-title mt-4">APEX LASER GROUP product catalog</h1>
         <p className="section-copy mt-4 max-w-3xl">
-          Browse laser lights, laser igniters, and machine models with SEO-ready descriptions,
-          static pricing, and reusable enterprise product cards.
+          Browse laser lights, laser igniters, and machine models with clear descriptions,
+          visible pricing, and a professional order-request flow.
         </p>
         <p className="mt-3 text-sm leading-7 text-neutral-600">
-          Prices are currently displayed in <span className="font-semibold text-neutral-900">{currency}</span> based on your detected region. Shipping costs are not included, and minors are not allowed to purchase.
+          Prices are currently displayed in <span className="font-semibold text-neutral-900">{currency}</span> based on your detected region. Shipping costs are not included and final order details are confirmed by our team after submission.
         </p>
       </section>
 

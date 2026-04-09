@@ -18,8 +18,8 @@ export default function ContactPage() {
         <Badge>Contact Us</Badge>
         <h1 className="section-title mt-4">Talk to APEX LASER GROUP</h1>
         <p className="section-copy mt-4 max-w-2xl">
-          Use this contact hub for quotes, OEM discussions, technical questions, lead times, and
-          product-matching requests for the APEX LASER GROUP catalog.
+          Contact our team for quotations, product recommendations, bulk orders, technical
+          questions, and delivery coordination across the APEX LASER GROUP catalog.
         </p>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           <div className="rounded-[24px] border border-[var(--border)] bg-white p-6">
@@ -46,7 +46,7 @@ export default function ContactPage() {
             href="https://wa.me/237XXXXXXXXX?text=Hello,%20I%20am%20interested%20in%20your%20laser%20products"
             external
           >
-            Start WhatsApp Chat
+            Contact on WhatsApp
           </Button>
           <Button href="/shop" variant="secondary">
             Back to Catalog

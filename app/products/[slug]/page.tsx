@@ -138,7 +138,7 @@ export default async function ProductPage({ params }: PageProps) {
 
               <p className="text-base leading-8 text-neutral-600">{product.shortDescription}</p>
               <p className="text-sm leading-7 text-neutral-600">
-                Prices are displayed in <span className="font-semibold text-neutral-900">{pricing.currency}</span> based on your detected region. Shipping costs are not included, and minors are not allowed to purchase.
+                Prices are displayed in <span className="font-semibold text-neutral-900">{pricing.currency}</span> based on your detected region. Shipping costs are not included and final order details are confirmed by our team before processing.
               </p>
 
               <ProductOrderPanel

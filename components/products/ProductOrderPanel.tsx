@@ -59,9 +59,9 @@ export function ProductOrderPanel({
 
       <p className="text-sm leading-7 text-neutral-600">
         Ordering <span className="font-semibold text-neutral-900">{productName}</span> does not
-        trigger online payment. We use your request to prepare and confirm the order manually.
-        Shipping costs are not included in the displayed subtotal, and minors are not allowed to
-        purchase.
+        trigger online payment. We use your request to prepare the order, confirm availability,
+        and review the final details with you directly. Shipping costs are not included in the
+        displayed subtotal.
       </p>
     </div>
   );
