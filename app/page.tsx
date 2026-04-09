@@ -24,9 +24,7 @@ export const metadata: Metadata = createMetadata({
 });
 
 const featuredProducts = products.slice(0, 8);
-const heroProduct =
-  products.find((product) => product.category.toLowerCase().includes("machine")) ??
-  featuredProducts[0];
+const heroProducts = products.slice(0, 6);
 
 const promoSections = [
   {
@@ -115,7 +113,7 @@ export default async function HomePage() {
                   Browse Catalog
                 </Button>
               </div>
-              <HomeHeroShowcase product={heroProduct} />
+              <HomeHeroShowcase products={heroProducts} />
             </div>
           </div>
         </section>
