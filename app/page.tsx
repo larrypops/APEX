@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { ProductCard } from "@/components/products/ProductCard";
 import { products } from "@/data/products";
-import { getPreferredCurrency } from "@/lib/currency";
+import { getPreferredCurrency } from "@/lib/currency-server";
 import { createMetadata, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = createMetadata({

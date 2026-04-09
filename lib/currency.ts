@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import type { Product } from "@/data/products";
 import { formatPrice } from "@/lib/pricing";
 
@@ -20,12 +19,6 @@ export function currencyFromCountry(country?: string | null): CurrencyCode {
   if (EUROPE_COUNTRIES.has(normalized)) return "EUR";
   if (AMERICAS_COUNTRIES.has(normalized)) return "USD";
   return "USD";
-}
-
-export async function getPreferredCurrency(): Promise<CurrencyCode> {
-  const store = await cookies();
-  const value = store.get(CURRENCY_COOKIE)?.value;
-  return value === "EUR" ? "EUR" : "USD";
 }
 
 export function getProductPricing(product: Product, currency: CurrencyCode) {

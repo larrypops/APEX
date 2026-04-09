@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ProductCard } from "@/components/products/ProductCard";
 import { Badge } from "@/components/ui/Badge";
 import { products } from "@/data/products";
-import { getPreferredCurrency } from "@/lib/currency";
+import { getPreferredCurrency } from "@/lib/currency-server";
 import { createMetadata } from "@/lib/site";
 
 export const metadata: Metadata = createMetadata({

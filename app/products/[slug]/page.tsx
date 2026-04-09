@@ -8,7 +8,8 @@ import { PriceBlock } from "@/components/products/PriceBlock";
 import { RelatedProducts } from "@/components/products/RelatedProducts";
 import { Badge } from "@/components/ui/Badge";
 import { getProductBySlug, products } from "@/data/products";
-import { getPreferredCurrency, getProductPricing } from "@/lib/currency";
+import { getProductPricing } from "@/lib/currency";
+import { getPreferredCurrency } from "@/lib/currency-server";
 import { absoluteUrl, createMetadata, siteConfig } from "@/lib/site";
 
 type PageProps = {

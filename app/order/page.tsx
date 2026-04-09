@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { OrderRequestForm } from "@/components/order/OrderRequestForm";
 import { OrderSummary } from "@/components/order/OrderSummary";
 import { getProductBySlug } from "@/data/products";
-import { getPreferredCurrency } from "@/lib/currency";
+import { getPreferredCurrency } from "@/lib/currency-server";
 import { createMetadata } from "@/lib/site";
 
 type PageProps = {
