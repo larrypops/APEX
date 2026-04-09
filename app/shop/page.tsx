@@ -30,7 +30,7 @@ export default async function ShopPage() {
         </p>
       </section>
 
-      <section className="fade-up fade-up-delay-1 mt-8 grid grid-cols-2 gap-4 md:gap-5">
+      <section className="fade-up fade-up-delay-1 mt-8 grid grid-cols-2 gap-4 md:gap-5 lg:grid-cols-3">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} currency={currency} />
         ))}

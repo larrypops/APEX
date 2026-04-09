@@ -130,7 +130,7 @@ export default async function HomePage() {
               Open catalog page
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-4 md:gap-5">
+          <div className="grid grid-cols-2 gap-4 md:gap-5 lg:grid-cols-3">
             {catalogProducts.map((product) => (
               <ProductCard key={product.id} product={product} currency={currency} />
             ))}
