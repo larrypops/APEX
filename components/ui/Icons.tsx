@@ -50,6 +50,14 @@ export function MenuIcon({ className = baseClass }: IconProps) {
   );
 }
 
+export function CloseIcon({ className = baseClass }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+      <path d="m6.75 6.75 10.5 10.5M17.25 6.75 6.75 17.25" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export function ArrowRightIcon({ className = baseClass }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
