@@ -209,7 +209,11 @@ export default async function ProductPage({ params }: PageProps) {
         </section>
 
         <section className="fade-up fade-up-delay-2 mt-8">
-          <RelatedProducts currentSlug={product.slug} relatedSlugs={product.relatedProductSlugs} />
+          <RelatedProducts
+            currentSlug={product.slug}
+            relatedSlugs={product.relatedProductSlugs}
+            currency={pricing.currency}
+          />
         </section>
       </div>
     </>

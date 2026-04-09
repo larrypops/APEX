@@ -1,12 +1,14 @@
 import { ProductCard } from "@/components/products/ProductCard";
 import { products } from "@/data/products";
+import type { CurrencyCode } from "@/lib/currency";
 
 type RelatedProductsProps = {
   currentSlug: string;
   relatedSlugs: string[];
+  currency: CurrencyCode;
 };
 
-export function RelatedProducts({ currentSlug, relatedSlugs }: RelatedProductsProps) {
+export function RelatedProducts({ currentSlug, relatedSlugs, currency }: RelatedProductsProps) {
   const related = products.filter(
     (product) => product.slug !== currentSlug && relatedSlugs.includes(product.slug),
   );
@@ -21,7 +23,7 @@ export function RelatedProducts({ currentSlug, relatedSlugs }: RelatedProductsPr
       </div>
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         {related.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} currency={currency} />
         ))}
       </div>
     </div>
