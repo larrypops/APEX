@@ -31,7 +31,7 @@ export function ProductCard({ product, currency }: ProductCardProps) {
           </div>
         </div>
         <div className="space-y-4 p-5">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-700">
             Model {product.model}
           </p>
           <h3 className="text-lg font-semibold leading-7 tracking-tight text-neutral-950">
@@ -39,7 +39,7 @@ export function ProductCard({ product, currency }: ProductCardProps) {
           </h3>
           <div className="flex items-center gap-2 text-sm">
             {pricing.oldPrice ? (
-              <span className="text-neutral-400 line-through">
+              <span className="text-neutral-500 line-through">
                 {formatPrice(pricing.oldPrice, pricing.currency)}
               </span>
             ) : null}
@@ -47,7 +47,7 @@ export function ProductCard({ product, currency }: ProductCardProps) {
               {formatPrice(pricing.currentPrice, pricing.currency)}
             </span>
           </div>
-          <p className="text-sm leading-7 text-neutral-600">{product.shortDescription}</p>
+          <p className="text-sm leading-7 text-neutral-700">{product.shortDescription}</p>
         </div>
       </Link>
     </article>

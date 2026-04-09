@@ -23,7 +23,7 @@ export default function ContactPage() {
         </p>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           <div className="rounded-[24px] border border-[var(--border)] bg-white p-6">
-            <p className="text-sm uppercase tracking-[0.2em] text-neutral-500">Direct Contacts</p>
+            <p className="text-sm uppercase tracking-[0.2em] text-neutral-700">Direct Contacts</p>
             <div className="mt-4 space-y-3 text-neutral-800">
               <p>WhatsApp / WeChat: +86-15305304222</p>
               <p>Line ID: 86-15305304222</p>
@@ -33,7 +33,7 @@ export default function ContactPage() {
             </div>
           </div>
           <div className="rounded-[24px] border border-[var(--border)] bg-[var(--accent-soft)] p-6">
-            <p className="text-sm uppercase tracking-[0.2em] text-neutral-500">Availability</p>
+            <p className="text-sm uppercase tracking-[0.2em] text-neutral-700">Availability</p>
             <div className="mt-4 space-y-3 text-neutral-800">
               <p>Address: 30 N Gould St Num 39904 Sheridan, WY 82801</p>
               <p>Hours: 00:00 - 24:00</p>

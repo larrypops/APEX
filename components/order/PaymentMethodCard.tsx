@@ -44,7 +44,7 @@ export function PaymentMethodCard({
       </div>
       <div>
         <p className="text-sm font-semibold text-neutral-950">{label}</p>
-        <p className="mt-1 text-sm leading-6 text-neutral-600">{helper}</p>
+        <p className="mt-1 text-sm leading-6 text-neutral-700">{helper}</p>
       </div>
     </button>
   );

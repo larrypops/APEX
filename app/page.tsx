@@ -106,7 +106,7 @@ export default async function HomePage() {
                     Explore laser lights, laser igniters, and laser machines with clear product
                     pages, visible pricing, and a fast order-request experience.
                   </p>
-                  <p className="text-sm leading-7 text-neutral-600">
+                  <p className="text-sm leading-7 text-neutral-700">
                     Prices are shown in USD or EUR based on your region. Shipping is confirmed with
                     your order.
                   </p>
@@ -151,7 +151,7 @@ export default async function HomePage() {
               <h2 className="mt-4 text-3xl font-semibold tracking-tight text-neutral-950">
                 {section.title}
               </h2>
-              <p className="mt-4 max-w-xl text-base leading-8 text-neutral-600">{section.copy}</p>
+              <p className="mt-4 max-w-xl text-base leading-8 text-neutral-700">{section.copy}</p>
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 {section.items.map((item) => (
                   <div
@@ -174,7 +174,7 @@ export default async function HomePage() {
               </p>
               <h2 className="section-title mt-2">Recent orders, renewals, and signups</h2>
             </div>
-            <p className="max-w-2xl text-sm leading-7 text-neutral-600">
+            <p className="max-w-2xl text-sm leading-7 text-neutral-700">
               A quick overview of buyer activity and customer interest across the APEX LASER GROUP
               catalog.
             </p>
@@ -185,7 +185,7 @@ export default async function HomePage() {
                 key={item.label}
                 className="rounded-[24px] border border-[var(--border)] bg-white p-5"
               >
-                <p className="text-sm uppercase tracking-[0.18em] text-neutral-600">{item.label}</p>
+                <p className="text-sm uppercase tracking-[0.18em] text-neutral-700">{item.label}</p>
                 <p className="mt-5 text-4xl font-semibold tracking-tight text-neutral-950">
                   {item.value}
                 </p>
@@ -201,18 +201,18 @@ export default async function HomePage() {
               Contact + Social
             </p>
             <h2 className="section-title mt-2">We are here to assist you</h2>
-            <p className="mt-4 text-base leading-8 text-neutral-600">
+            <p className="mt-4 text-base leading-8 text-neutral-700">
               Keep the social-contact-footer rhythm of the source site while making each channel
               cleaner and easier to scan.
             </p>
             <div className="mt-6 space-y-4 rounded-[22px] border border-[var(--border)] bg-white p-5">
-              <p className="text-sm text-neutral-600">Address</p>
+              <p className="text-sm text-neutral-700">Address</p>
               <p className="font-medium text-neutral-900">
                 30 N Gould St Num 39904 Sheridan, WY 82801
               </p>
-              <p className="text-sm text-neutral-600">Hours</p>
+              <p className="text-sm text-neutral-700">Hours</p>
               <p className="font-medium text-neutral-900">00:00 - 24:00</p>
-              <p className="text-sm text-neutral-600">Phone</p>
+              <p className="text-sm text-neutral-700">Phone</p>
               <p className="font-medium text-neutral-900">+86-15305304222 / +1(329)228-8566</p>
             </div>
             <div className="mt-6 flex flex-wrap gap-3">

@@ -31,7 +31,7 @@ export function ProductOrderPanel({
     <div className="space-y-4 rounded-[24px] border border-[var(--border)] bg-[var(--accent-soft)] p-5">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-neutral-500">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-neutral-700">
             Order Request
           </p>
           <p className="mt-2 text-sm leading-7 text-neutral-700">
@@ -40,7 +40,7 @@ export function ProductOrderPanel({
           </p>
         </div>
         <div className="rounded-2xl border border-[var(--border)] bg-white px-4 py-3 text-right">
-          <p className="text-xs uppercase tracking-[0.16em] text-neutral-500">Subtotal</p>
+          <p className="text-xs uppercase tracking-[0.16em] text-neutral-700">Subtotal</p>
           <p className="mt-1 text-lg font-semibold text-[var(--accent-strong)]">
             {formatPrice(currentPrice * quantity, currency)}
           </p>
@@ -64,7 +64,7 @@ export function ProductOrderPanel({
         </Button>
       </div>
 
-      <p className="text-sm leading-7 text-neutral-600">
+      <p className="text-sm leading-7 text-neutral-700">
         Ordering <span className="font-semibold text-neutral-900">{productName}</span> does not
         trigger online payment. We use your request to prepare the order, confirm availability,
         and review the final details with you directly. Shipping costs are not included in the

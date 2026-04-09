@@ -15,7 +15,7 @@ export function OrderSummary({ product, quantity, currency }: OrderSummaryProps)
 
   return (
     <aside className="surface rounded-[28px] p-5 md:sticky md:top-28 md:p-6">
-      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-500">
+      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-700">
         Order Summary
       </p>
 
@@ -35,25 +35,25 @@ export function OrderSummary({ product, quantity, currency }: OrderSummaryProps)
             <h2 className="text-xl font-semibold tracking-tight text-neutral-950">
               {product.name}
             </h2>
-            <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500">
+            <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-neutral-700">
               Model {product.model}
             </p>
-            <p className="mt-2 text-sm leading-7 text-neutral-600">{product.shortDescription}</p>
+            <p className="mt-2 text-sm leading-7 text-neutral-700">{product.shortDescription}</p>
           </div>
 
           <div className="grid gap-3 rounded-[20px] border border-[var(--border)] bg-neutral-50 p-4">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-neutral-500">Quantity</span>
+              <span className="text-neutral-700">Quantity</span>
               <span className="font-semibold text-neutral-950">{quantity}</span>
             </div>
             <div className="flex items-center justify-between text-sm">
-              <span className="text-neutral-500">Unit price</span>
+              <span className="text-neutral-700">Unit price</span>
               <span className="font-semibold text-neutral-950">
                 {pricing.currentPriceFormatted}
               </span>
             </div>
             <div className="flex items-center justify-between border-t border-[var(--border)] pt-3 text-sm">
-              <span className="text-neutral-500">Total</span>
+              <span className="text-neutral-700">Total</span>
               <span className="text-lg font-semibold text-[var(--accent-strong)]">
                 {new Intl.NumberFormat("en-US", {
                   style: "currency",

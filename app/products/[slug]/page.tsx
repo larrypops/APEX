@@ -103,7 +103,7 @@ export default async function ProductPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="container-shell py-6 md:py-10">
-        <div className="mb-6 flex flex-wrap items-center gap-2 text-sm text-neutral-500">
+        <div className="mb-6 flex flex-wrap items-center gap-2 text-sm text-neutral-700">
           <Link href="/" className="hover:text-neutral-950">
             Home
           </Link>
@@ -122,13 +122,13 @@ export default async function ProductPage({ params }: PageProps) {
             <div className="space-y-6">
               <div className="space-y-4">
                 <Badge>{product.category}</Badge>
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-neutral-500">
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-neutral-700">
                   Model {product.model}
                 </p>
                 <h1 className="text-4xl font-semibold tracking-tight text-neutral-950">
                   {product.name}
                 </h1>
-                <div className="flex flex-wrap items-center gap-3 text-sm text-neutral-600">
+                <div className="flex flex-wrap items-center gap-3 text-sm text-neutral-700">
                   <span className="font-semibold text-[var(--gold)]">
                     {"★".repeat(Math.round(product.rating))}
                   </span>
@@ -143,8 +143,8 @@ export default async function ProductPage({ params }: PageProps) {
                 currency={pricing.currency}
               />
 
-              <p className="text-base leading-8 text-neutral-600">{product.shortDescription}</p>
-              <p className="text-sm leading-7 text-neutral-600">
+              <p className="text-base leading-8 text-neutral-700">{product.shortDescription}</p>
+              <p className="text-sm leading-7 text-neutral-700">
                 Prices are displayed in <span className="font-semibold text-neutral-900">{pricing.currency}</span> based on your detected region. Shipping costs are not included and final order details are confirmed by our team before processing.
               </p>
 
@@ -171,7 +171,7 @@ export default async function ProductPage({ params }: PageProps) {
               </div>
 
               <div className="rounded-[24px] border border-[var(--border)] bg-white p-5">
-                <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-500">
+                <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-700">
                   Preferred Payment Options
                 </h2>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -184,13 +184,13 @@ export default async function ProductPage({ params }: PageProps) {
                     </span>
                   ))}
                 </div>
-                <p className="mt-3 text-sm leading-7 text-neutral-600">
+                <p className="mt-3 text-sm leading-7 text-neutral-700">
                   Payment is not processed online. Your preferred method will be collected during
                   the order request and confirmed by our team afterwards.
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center gap-3 text-sm text-neutral-600">
+              <div className="flex flex-wrap items-center gap-3 text-sm text-neutral-700">
                 <span className="font-semibold text-neutral-900">Share:</span>
                 {[
                   { label: "Facebook", icon: FacebookIcon },

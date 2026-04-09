@@ -25,7 +25,7 @@ export default async function ShopPage() {
           Browse laser lights, laser igniters, and machine models with clear descriptions,
           visible pricing, and a professional order-request flow.
         </p>
-        <p className="mt-3 text-sm leading-7 text-neutral-600">
+        <p className="mt-3 text-sm leading-7 text-neutral-700">
           Prices are currently displayed in <span className="font-semibold text-neutral-900">{currency}</span> based on your detected region. Shipping costs are not included and final order details are confirmed by our team after submission.
         </p>
       </section>

@@ -130,7 +130,7 @@ export function OrderRequestForm({ product, quantity, currency }: OrderRequestFo
         <h1 className="mt-3 text-3xl font-semibold tracking-tight text-neutral-950">
           Fill in your information so we can process your order
         </h1>
-        <p className="mt-4 max-w-2xl text-base leading-8 text-neutral-600">
+        <p className="mt-4 max-w-2xl text-base leading-8 text-neutral-700">
           This order request form keeps the premium ecommerce flow while allowing our team to
           confirm pricing, stock, delivery details, and preferred payment method manually.
         </p>
@@ -177,7 +177,7 @@ export function OrderRequestForm({ product, quantity, currency }: OrderRequestFo
         <div>
           <div className="mb-4">
             <p className="text-sm font-semibold text-neutral-900">Preferred payment method</p>
-            <p className="mt-1 text-sm leading-7 text-neutral-600">
+            <p className="mt-1 text-sm leading-7 text-neutral-700">
               Select the payment method you would prefer during order confirmation.
             </p>
           </div>
@@ -198,7 +198,7 @@ export function OrderRequestForm({ product, quantity, currency }: OrderRequestFo
           {errors.paymentMethod ? (
             <p className="mt-2 text-sm text-red-600">{errors.paymentMethod}</p>
           ) : null}
-          <p className="mt-3 text-sm leading-7 text-neutral-600">
+          <p className="mt-3 text-sm leading-7 text-neutral-700">
             Your selected payment method will be used as your preferred payment option during order
             confirmation.
           </p>
@@ -207,7 +207,7 @@ export function OrderRequestForm({ product, quantity, currency }: OrderRequestFo
         <div className="flex flex-col gap-4 rounded-[24px] border border-[rgba(120,162,200,0.16)] bg-[linear-gradient(180deg,rgba(247,251,255,0.92)_0%,rgba(234,243,251,0.92)_100%)] p-5 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-sm font-semibold text-neutral-900">Ready to submit your order?</p>
-            <p className="mt-1 text-sm leading-7 text-neutral-600">
+            <p className="mt-1 text-sm leading-7 text-neutral-700">
               We will contact you to confirm your order details.
             </p>
           </div>

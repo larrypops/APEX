@@ -21,14 +21,14 @@ export function QuantitySelector({ value, onChange }: QuantitySelectorProps) {
 
   return (
     <div>
-      <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-neutral-500">
+      <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-neutral-700">
         Quantity
       </p>
       <div className="inline-flex items-center rounded-full border border-[var(--border)] bg-white p-1">
         <button
           type="button"
           onClick={() => updateQuantity(Math.max(1, quantity - 1))}
-          className="h-10 w-10 rounded-full text-lg text-neutral-700 transition hover:bg-neutral-100"
+          className="h-10 w-10 rounded-full text-lg text-neutral-800 transition hover:bg-neutral-100"
           aria-label="Decrease quantity"
         >
           -
@@ -39,7 +39,7 @@ export function QuantitySelector({ value, onChange }: QuantitySelectorProps) {
         <button
           type="button"
           onClick={() => updateQuantity(quantity + 1)}
-          className="h-10 w-10 rounded-full text-lg text-neutral-700 transition hover:bg-neutral-100"
+          className="h-10 w-10 rounded-full text-lg text-neutral-800 transition hover:bg-neutral-100"
           aria-label="Increase quantity"
         >
           +

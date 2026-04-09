@@ -17,18 +17,18 @@ export function Footer() {
       <div className="container-shell grid gap-8 py-10 md:grid-cols-[1fr_0.9fr]">
         <div>
           <BrandMark light />
-          <p className="mt-5 text-sm uppercase tracking-[0.24em] text-sky-200/70">Follow Us</p>
+          <p className="mt-5 text-sm uppercase tracking-[0.24em] text-sky-100">Follow Us</p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white">
             APEX LASER GROUP customer support and sales contact
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-8 text-slate-300">
+          <p className="mt-4 max-w-2xl text-base leading-8 text-slate-100">
             Contact our team for product details, order assistance, bulk requests, and delivery
             coordination for laser equipment and machine orders.
           </p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2">
           <div className="rounded-[24px] border border-[rgba(123,173,225,0.14)] bg-white/8 p-5 backdrop-blur-md">
-            <p className="text-sm font-semibold text-sky-100/70">Contact</p>
+            <p className="text-sm font-semibold text-sky-50">Contact</p>
             <div className="mt-4 space-y-2 text-slate-100">
               <p>30 N Gould St Num 39904 Sheridan, WY 82801</p>
               <p>00:00 - 24:00</p>
@@ -37,7 +37,7 @@ export function Footer() {
             </div>
           </div>
           <div className="rounded-[24px] border border-[rgba(123,173,225,0.14)] bg-white/8 p-5 backdrop-blur-md">
-            <p className="text-sm font-semibold text-sky-100/70">Policies</p>
+            <p className="text-sm font-semibold text-sky-50">Policies</p>
             <div className="mt-4 flex flex-wrap gap-2">
               {policyLinks.map((item) => (
                 <Link
@@ -53,7 +53,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-[rgba(123,173,225,0.12)] py-5">
-        <p className="text-center text-sm text-slate-300">
+        <p className="text-center text-sm text-slate-100">
           © 2020-2026 APEX LASER GROUP. All rights reserved. Product information and order requests are handled directly by our team.
         </p>
       </div>
