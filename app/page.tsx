@@ -124,10 +124,12 @@ export default async function HomePage() {
               Open catalog page
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:grid-cols-3 lg:gap-6">
+          <div className="overflow-hidden rounded-[18px] border border-[var(--border)] bg-[var(--border)]">
+            <div className="grid grid-cols-2 gap-px lg:grid-cols-3">
             {catalogProducts.map((product) => (
               <ProductCard key={product.id} product={product} currency={currency} />
             ))}
+            </div>
           </div>
         </section>
 
