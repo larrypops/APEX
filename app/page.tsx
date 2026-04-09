@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { HomeHeroShowcase } from "@/components/home/HomeHeroShowcase";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { ProductCard } from "@/components/products/ProductCard";
@@ -89,7 +90,7 @@ export default async function HomePage() {
       />
       <div className="container-shell flex flex-col gap-8 py-6 md:py-10">
         <section className="surface fade-up rounded-[28px] p-4 md:p-6">
-          <div className="rounded-[22px] border border-[var(--border)] bg-[linear-gradient(135deg,#fff6ef_0%,#ffffff_44%,#fff5d9_100%)] p-6 md:p-10">
+          <div className="rounded-[22px] border border-[rgba(123,173,225,0.16)] bg-[linear-gradient(145deg,rgba(238,247,255,0.97)_0%,rgba(255,255,255,0.96)_38%,rgba(226,242,255,0.94)_100%)] p-6 md:p-10">
             <div className="mb-6 flex flex-wrap items-center gap-3">
               <Badge variant="warning">Important Information</Badge>
               <p className="text-sm font-medium text-neutral-700">
@@ -137,32 +138,25 @@ export default async function HomePage() {
                   ))}
                 </div>
               </div>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-[24px] border border-[var(--border)] bg-neutral-950 p-5 text-white">
-                  <p className="text-xs uppercase tracking-[0.28em] text-white/60">Support</p>
-                  <h2 className="mt-6 text-2xl font-semibold">Dedicated Sales Assistance</h2>
-                  <p className="mt-3 text-sm leading-7 text-white/72">
-                    Speak with our team about the right model, technical requirements, shipping
-                    options, and order preparation for your market.
-                  </p>
-                </div>
-                <div className="rounded-[24px] border border-[var(--border)] bg-[var(--accent)] p-5 text-white">
-                  <p className="text-xs uppercase tracking-[0.28em] text-white/70">Process</p>
-                  <h2 className="mt-6 text-2xl font-semibold">Fast Order Coordination</h2>
-                  <p className="mt-3 text-sm leading-7 text-white/80">
-                    Submit your request online, choose your preferred payment method, and receive
-                    confirmation from our team with the next steps.
-                  </p>
-                </div>
-                <div className="sm:col-span-2 rounded-[24px] border border-[var(--border)] bg-white p-4">
-                  <Image
-                    src="/images/products/hero-catalog.svg"
-                    alt="Laser catalog illustration"
-                    width={1200}
-                    height={540}
-                    className="h-auto w-full rounded-[18px]"
-                    priority
-                  />
+              <div className="space-y-4">
+                <HomeHeroShowcase products={featuredProducts.slice(0, 6)} currency={currency} />
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-[24px] border border-[rgba(123,173,225,0.14)] bg-[rgba(7,17,32,0.82)] p-5 text-white">
+                    <p className="text-xs uppercase tracking-[0.28em] text-[#8fdfff]">Support</p>
+                    <h2 className="mt-4 text-2xl font-semibold">Dedicated Sales Assistance</h2>
+                    <p className="mt-3 text-sm leading-7 text-white/72">
+                      Speak with our team about the right model, technical requirements, shipping
+                      options, and order preparation for your market.
+                    </p>
+                  </div>
+                  <div className="rounded-[24px] border border-[rgba(123,173,225,0.14)] bg-[linear-gradient(135deg,#0a4fa1_0%,#0e8ee8_54%,#38c5ff_100%)] p-5 text-white shadow-[0_24px_60px_rgba(13,92,208,0.28)]">
+                    <p className="text-xs uppercase tracking-[0.28em] text-white/80">Process</p>
+                    <h2 className="mt-4 text-2xl font-semibold">Fast Order Coordination</h2>
+                    <p className="mt-3 text-sm leading-7 text-white/88">
+                      Submit your request online, choose your preferred payment method, and receive
+                      confirmation from our team with the next steps.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

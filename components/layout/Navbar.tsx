@@ -10,17 +10,17 @@ const navLinks = [
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-50 border-b border-black/5 bg-[rgba(247,247,244,0.86)] backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-[rgba(123,173,225,0.12)] bg-[rgba(7,17,32,0.82)] backdrop-blur-xl">
       <div className="container-shell py-4">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <BrandMark compact />
+          <BrandMark compact light />
 
           <nav className="flex flex-wrap items-center gap-3 md:gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-neutral-700 transition hover:text-neutral-950"
+                className="text-sm font-medium text-slate-200 transition hover:text-white"
               >
                 {link.label}
               </Link>
@@ -28,12 +28,12 @@ export function Navbar() {
           </nav>
 
           <div className="flex flex-wrap items-center gap-3">
-            <Badge variant="warning">SSR Catalog</Badge>
+            <Badge variant="warning">Ready to Order</Badge>
             <Link
               href="/shop"
-              className="rounded-full border border-[var(--border)] bg-white px-4 py-2 text-sm font-semibold text-neutral-900 transition hover:border-neutral-900"
+              className="rounded-full border border-[rgba(123,173,225,0.14)] bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-[rgba(142,226,255,0.5)] hover:bg-white/14"
             >
-              Cart (0)
+              View Catalog
             </Link>
           </div>
         </div>

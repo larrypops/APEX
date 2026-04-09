@@ -40,7 +40,7 @@ const paymentMethods: Array<{
   {
     value: "mastercard",
     label: "Mastercard",
-    helper: "Choose Mastercard for a familiar card-based payment confirmation flow.",
+    helper: "Choose Mastercard for a familiar card payment option during final confirmation.",
     logo: "/images/payments/mastercard.svg",
   },
   {
@@ -143,7 +143,7 @@ export function OrderRequestForm({ product, quantity, currency }: OrderRequestFo
         <input type="hidden" name="unitPrice" value={String(orderMeta.unitPrice)} />
         <input type="hidden" name="currency" value={orderMeta.currency} />
 
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-2 md:gap-5">
           <Field label="First Name" name="firstName" placeholder="Enter your first name" error={errors.firstName} />
           <Field label="Last Name" name="lastName" placeholder="Enter your last name" error={errors.lastName} />
           <Field label="Phone Number" name="phone" type="tel" placeholder="Enter your phone number" error={errors.phone} />
@@ -168,7 +168,7 @@ export function OrderRequestForm({ product, quantity, currency }: OrderRequestFo
                 name="notes"
                 rows={4}
                 placeholder="Add special instructions, project notes, or delivery details"
-                className="w-full rounded-[22px] border border-[var(--border)] bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-neutral-900"
+                className="w-full rounded-[22px] border border-[rgba(120,162,200,0.18)] bg-[rgba(247,251,255,0.92)] px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-[var(--accent)] focus:bg-white"
               />
             </label>
           </div>
@@ -181,7 +181,7 @@ export function OrderRequestForm({ product, quantity, currency }: OrderRequestFo
               Select the payment method you would prefer during order confirmation.
             </p>
           </div>
-          <div className="grid gap-4">
+          <div className="grid gap-4 md:grid-cols-3">
             {paymentMethods.map((method) => (
               <PaymentMethodCard
                 key={method.value}
@@ -204,7 +204,7 @@ export function OrderRequestForm({ product, quantity, currency }: OrderRequestFo
           </p>
         </div>
 
-        <div className="flex flex-col gap-4 rounded-[24px] border border-[var(--border)] bg-neutral-50 p-5 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-4 rounded-[24px] border border-[rgba(120,162,200,0.16)] bg-[linear-gradient(180deg,rgba(247,251,255,0.92)_0%,rgba(234,243,251,0.92)_100%)] p-5 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-sm font-semibold text-neutral-900">Ready to submit your order?</p>
             <p className="mt-1 text-sm leading-7 text-neutral-600">
@@ -213,7 +213,7 @@ export function OrderRequestForm({ product, quantity, currency }: OrderRequestFo
           </div>
           <button
             type="submit"
-            className="button-motion inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-[rgba(207,63,35,0.24)] hover:bg-[var(--accent-strong)]"
+            className="button-motion inline-flex items-center justify-center rounded-full bg-[linear-gradient(135deg,#17b0ff_0%,#0b7cff_52%,#0a5ed7_100%)] px-6 py-3 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(10,94,215,0.22)] focus:outline-none focus:ring-2 focus:ring-[rgba(21,152,255,0.28)] hover:shadow-[0_22px_42px_rgba(10,94,215,0.32)]"
           >
             Submit Order
           </button>
@@ -239,8 +239,10 @@ function Field({ label, name, placeholder, type = "text", error }: FieldProps) {
         type={type}
         name={name}
         placeholder={placeholder}
-        className={`w-full rounded-[22px] border bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-neutral-900 ${
-          error ? "border-red-400" : "border-[var(--border)]"
+        className={`w-full rounded-[22px] border px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-[var(--accent)] focus:bg-white ${
+          error
+            ? "border-red-400 bg-white"
+            : "border-[rgba(120,162,200,0.18)] bg-[rgba(247,251,255,0.92)]"
         }`}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${name}-error` : undefined}

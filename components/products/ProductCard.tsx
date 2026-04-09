@@ -15,22 +15,25 @@ export function ProductCard({ product, currency }: ProductCardProps) {
   const pricing = getProductPricing(product, currency);
 
   return (
-    <article className="surface surface-soft group overflow-hidden rounded-[28px]">
+    <article className="surface surface-soft group overflow-hidden rounded-[28px] border-[rgba(123,173,225,0.14)]">
       <Link href={`/products/${product.slug}`} className="block">
-        <div className="relative overflow-hidden border-b border-[var(--border)] bg-[linear-gradient(180deg,#fff8f3_0%,#ffffff_100%)] p-4">
+        <div className="relative overflow-hidden border-b border-[var(--border)] bg-[linear-gradient(180deg,#edf8ff_0%,#ffffff_100%)] p-4">
           <Image
             src={product.images[0]}
             alt={product.name}
             width={640}
             height={640}
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
-            className="aspect-square w-full rounded-[20px] object-cover transition duration-300 group-hover:scale-[1.02]"
+            className="aspect-square w-full rounded-[20px] object-cover transition duration-300 group-hover:scale-[1.03]"
           />
           <div className="absolute left-7 top-7">
             <Badge>{product.category}</Badge>
           </div>
         </div>
         <div className="space-y-4 p-5">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+            Model {product.model}
+          </p>
           <h3 className="text-lg font-semibold leading-7 tracking-tight text-neutral-950">
             {product.name}
           </h3>

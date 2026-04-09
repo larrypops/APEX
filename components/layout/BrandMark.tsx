@@ -3,9 +3,10 @@ import Link from "next/link";
 
 type BrandMarkProps = {
   compact?: boolean;
+  light?: boolean;
 };
 
-export function BrandMark({ compact = false }: BrandMarkProps) {
+export function BrandMark({ compact = false, light = false }: BrandMarkProps) {
   return (
     <Link href="/" className="flex items-center gap-3">
       <div
@@ -23,8 +24,16 @@ export function BrandMark({ compact = false }: BrandMarkProps) {
         />
       </div>
       <div>
-        <p className="text-xs uppercase tracking-[0.24em] text-neutral-500">Enterprise Catalog</p>
-        <p className="text-base font-semibold text-neutral-950">APEX LASER GROUP</p>
+        <p
+          className={`text-xs uppercase tracking-[0.24em] ${
+            light ? "text-sky-100/72" : "text-slate-500"
+          }`}
+        >
+          Enterprise Catalog
+        </p>
+        <p className={`text-base font-semibold ${light ? "text-white" : "text-slate-950"}`}>
+          APEX LASER GROUP
+        </p>
       </div>
     </Link>
   );

@@ -43,10 +43,10 @@ export default async function OrderPage({ searchParams }: PageProps) {
   return (
     <div className="container-shell py-6 md:py-10">
       <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-        <div className="fade-up">
+        <div className="fade-up fade-up-delay-1 order-2 lg:order-1">
           <OrderRequestForm product={product} quantity={quantity} currency={currency} />
         </div>
-        <div className="fade-up fade-up-delay-1">
+        <div className="fade-up order-1 lg:order-2">
           <OrderSummary product={product} quantity={quantity} currency={currency} />
         </div>
       </div>

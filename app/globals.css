@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f7f4;
-  --foreground: #111111;
-  --muted: #6a6a61;
-  --card: #ffffff;
-  --border: rgba(17, 17, 17, 0.08);
-  --accent: #cf3f23;
-  --accent-strong: #9d230d;
-  --accent-soft: #fdf0ea;
-  --gold: #d2a34a;
-  --shadow: 0 22px 60px rgba(10, 10, 10, 0.08);
+  --background: #081221;
+  --foreground: #f4f9ff;
+  --muted: #68809f;
+  --card: #f7fbff;
+  --border: rgba(108, 152, 194, 0.18);
+  --accent: #1598ff;
+  --accent-strong: #0069d9;
+  --accent-soft: #e8f6ff;
+  --gold: #d7ecff;
+  --shadow: 0 24px 80px rgba(3, 10, 26, 0.26);
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -25,10 +25,11 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at top left, rgba(207, 63, 35, 0.08), transparent 28%),
-    linear-gradient(180deg, #fbfbf8 0%, var(--background) 40%, #f2f0eb 100%);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    radial-gradient(circle at top right, rgba(80, 187, 255, 0.18), transparent 22%),
+    radial-gradient(circle at 12% 12%, rgba(28, 96, 220, 0.16), transparent 28%),
+    linear-gradient(180deg, #071120 0%, #0b1730 36%, #091221 100%);
+  color: #dce9f8;
+  font-family: "Trebuchet MS", "Segoe UI", Arial, Helvetica, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -50,7 +51,7 @@ img {
 }
 
 .surface {
-  background: rgba(255, 255, 255, 0.86);
+  background: linear-gradient(180deg, rgba(247, 251, 255, 0.96) 0%, rgba(236, 244, 252, 0.92) 100%);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   backdrop-filter: blur(14px);
@@ -65,7 +66,7 @@ img {
 
 .surface-soft:hover {
   transform: translateY(-2px);
-  box-shadow: 0 26px 70px rgba(10, 10, 10, 0.1);
+  box-shadow: 0 32px 90px rgba(3, 10, 26, 0.18);
 }
 
 .section-title {
@@ -79,6 +80,22 @@ img {
   color: var(--muted);
   font-size: 1rem;
   line-height: 1.7;
+}
+
+.hero-marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+}
+
+.hero-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1rem;
+  animation: hero-marquee 28s linear infinite;
+}
+
+.hero-marquee:hover .hero-marquee-track {
+  animation-play-state: paused;
 }
 
 .prose-copy p {
@@ -137,6 +154,16 @@ img {
   }
 }
 
+@keyframes hero-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-50% - 0.5rem));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -150,7 +177,23 @@ img {
 
   .fade-up,
   .fade-up-delay-1,
-  .fade-up-delay-2 {
+  .fade-up-delay-2,
+  .hero-marquee-track {
     animation: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .container-shell {
+    width: min(100%, calc(100% - 1rem));
+  }
+
+  .hero-marquee {
+    mask-image: none;
+  }
+
+  .hero-marquee-track {
+    gap: 0.75rem;
+    animation-duration: 22s;
   }
 }

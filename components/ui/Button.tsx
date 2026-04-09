@@ -17,11 +17,11 @@ export function Button({
   external = false,
 }: ButtonProps) {
   const base =
-    "button-motion inline-flex items-center rounded-full px-5 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[rgba(207,63,35,0.24)]";
+    "button-motion inline-flex items-center rounded-full px-5 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[rgba(21,152,255,0.28)]";
   const tone =
     variant === "secondary"
-      ? "border border-[var(--border)] bg-white text-neutral-900 hover:border-neutral-900"
-      : "bg-[var(--accent)] text-white hover:bg-[var(--accent-strong)]";
+      ? "border border-[rgba(18,52,88,0.14)] bg-white/90 text-slate-900 hover:border-[rgba(0,105,217,0.42)] hover:bg-white"
+      : "bg-[linear-gradient(135deg,#17b0ff_0%,#0b7cff_52%,#0a5ed7_100%)] text-white shadow-[0_18px_36px_rgba(10,94,215,0.26)] hover:shadow-[0_22px_44px_rgba(10,94,215,0.34)]";
 
   if (external) {
     return (
