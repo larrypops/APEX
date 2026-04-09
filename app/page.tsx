@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { HomeHeroShowcase } from "@/components/home/HomeHeroShowcase";
 import { Badge } from "@/components/ui/Badge";
@@ -39,11 +38,6 @@ const trustStats = [
   { label: "Repeat Buyers", value: "37", note: "Returning clients upgrading to higher-output models and repeat supply orders" },
   { label: "New Inquiries", value: "58", note: "Fresh demand from distributors, workshops, and industrial buyers" },
 ];
-
-const paymentProofs = Array.from({ length: 6 }, (_, index) => ({
-  id: index + 1,
-  src: `/images/payment-proofs/proof-${(index % 3) + 1}.svg`,
-}));
 
 const socialLinks = [
   { label: "Facebook", href: "#" },
@@ -132,7 +126,7 @@ export default async function HomePage() {
                       key={stat.label}
                       className="rounded-2xl border border-[var(--border)] bg-white/80 p-4"
                     >
-                      <p className="text-sm text-neutral-500">{stat.label}</p>
+                      <p className="text-sm text-neutral-600">{stat.label}</p>
                       <p className="mt-2 text-lg font-semibold text-neutral-950">{stat.value}</p>
                     </div>
                   ))}
@@ -208,44 +202,17 @@ export default async function HomePage() {
                 key={item.label}
                 className="rounded-[24px] border border-[var(--border)] bg-white p-5"
               >
-                <p className="text-sm uppercase tracking-[0.18em] text-neutral-500">{item.label}</p>
+                <p className="text-sm uppercase tracking-[0.18em] text-neutral-600">{item.label}</p>
                 <p className="mt-5 text-4xl font-semibold tracking-tight text-neutral-950">
                   {item.value}
                 </p>
-                <p className="mt-3 text-sm leading-7 text-neutral-600">{item.note}</p>
+                <p className="mt-3 text-sm leading-7 text-neutral-700">{item.note}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="fade-up grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="surface rounded-[28px] p-6 md:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--accent)]">
-              Customer Confidence
-            </p>
-            <h2 className="section-title mt-2">Order and payment reference area</h2>
-            <p className="mt-4 max-w-2xl text-base leading-8 text-neutral-600">
-              This section can be updated with approved order references, payment confirmations, or
-              fulfillment proof shared by your business team.
-            </p>
-            <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3">
-              {paymentProofs.map((proof) => (
-                <div
-                  key={proof.id}
-                  className="overflow-hidden rounded-[22px] border border-[var(--border)] bg-white"
-                >
-                  <Image
-                    src={proof.src}
-                    alt={`Payment proof placeholder ${proof.id}`}
-                    width={400}
-                    height={300}
-                    className="h-auto w-full"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-
+        <section className="fade-up">
           <div className="surface rounded-[28px] p-6 md:p-8">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--accent)]">
               Contact + Social
@@ -256,13 +223,13 @@ export default async function HomePage() {
               cleaner and easier to scan.
             </p>
             <div className="mt-6 space-y-4 rounded-[22px] border border-[var(--border)] bg-white p-5">
-              <p className="text-sm text-neutral-500">Address</p>
+              <p className="text-sm text-neutral-600">Address</p>
               <p className="font-medium text-neutral-900">
                 30 N Gould St Num 39904 Sheridan, WY 82801
               </p>
-              <p className="text-sm text-neutral-500">Hours</p>
+              <p className="text-sm text-neutral-600">Hours</p>
               <p className="font-medium text-neutral-900">00:00 - 24:00</p>
-              <p className="text-sm text-neutral-500">Phone</p>
+              <p className="text-sm text-neutral-600">Phone</p>
               <p className="font-medium text-neutral-900">+86-15305304222 / +1(329)228-8566</p>
             </div>
             <div className="mt-6 flex flex-wrap gap-3">

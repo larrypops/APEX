@@ -1,6 +1,5 @@
-import { Badge } from "@/components/ui/Badge";
 import { BrandMark } from "@/components/layout/BrandMark";
-import { CartIcon, ContactIcon, HomeIcon, MenuIcon, ShopIcon } from "@/components/ui/Icons";
+import { CartIcon, ContactIcon, HomeIcon, ShopIcon } from "@/components/ui/Icons";
 import Link from "next/link";
 
 const navLinks = [
@@ -13,10 +12,10 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-[rgba(123,173,225,0.12)] bg-[rgba(7,17,32,0.82)] backdrop-blur-xl">
       <div className="container-shell py-4">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <BrandMark compact light />
 
-          <div className="flex items-center justify-between gap-3 lg:flex-1 lg:justify-end">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between lg:flex-1 lg:justify-end">
             <nav className="flex flex-wrap items-center gap-2 md:gap-3">
               {navLinks.map((link) => {
                 const Icon = link.icon;
@@ -33,17 +32,9 @@ export function Navbar() {
                 );
               })}
             </nav>
-
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(123,173,225,0.14)] bg-white/8 text-sky-100 lg:hidden">
-              <MenuIcon className="h-4 w-4" />
-            </span>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3">
-            <Badge variant="warning">Ready to Order</Badge>
             <Link
               href="/shop"
-              className="rounded-full border border-[rgba(123,173,225,0.14)] bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-[rgba(142,226,255,0.5)] hover:bg-white/14"
+              className="inline-flex w-full items-center justify-center rounded-full border border-[rgba(123,173,225,0.14)] bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-[rgba(142,226,255,0.5)] hover:bg-white/14 sm:w-auto"
             >
               <span className="inline-flex items-center gap-2">
                 <CartIcon className="h-4 w-4 text-sky-100" />

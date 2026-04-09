@@ -23,18 +23,9 @@ export function BrandMark({ compact = false, light = false }: BrandMarkProps) {
           priority={compact}
         />
       </div>
-      <div>
-        <p
-          className={`text-xs uppercase tracking-[0.24em] ${
-            light ? "text-sky-100/72" : "text-slate-500"
-          }`}
-        >
-          Enterprise Catalog
-        </p>
-        <p className={`text-base font-semibold ${light ? "text-white" : "text-slate-950"}`}>
-          APEX LASER GROUP
-        </p>
-      </div>
+      <p className={`text-base font-semibold md:text-lg ${light ? "text-white" : "text-slate-950"}`}>
+        APEX LASER GROUP
+      </p>
     </Link>
   );
 }
